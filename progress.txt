@@ -51,6 +51,10 @@
 - SpeakerButton graceful fallback: checks isTtsAvailable(), returns null if unavailable
 - Auto-play: useEffect on exerciseKey triggers speakGreek() with 400ms delay
 - Greek text fields: greekPrompt (MC), greekText (translation), greekSentence (fill_blank)
+- resetAllProgress(): wipes lesson_progress, review_card, daily_streak + resets vocab learned + user XP
+- Profile stats: useFocusEffect to reload getUserProfile, getOrCreateStreak, getCompletedLessons on focus
+- Daily goal chips: [1,2,3,5] options with active/inactive chip styles (borderRadius.full)
+- Alert.alert with destructive style for reset confirmation
 
 ---
 
@@ -549,4 +553,32 @@
   - src/utils/ is the canonical location for utility modules (speech, etc.)
   - Wrap all Speech calls in try/catch for graceful failure
   - Greek text fields vary by exercise type: greekPrompt (MC), greekText (translation), greekSentence (fill_blank)
+---
+
+## Iteration 17 - US-017: Profile Screen & Settings
+- What was implemented:
+  - Full profile screen with user avatar, editable username (tap pencil icon to edit inline)
+  - Stats grid: Level, Total XP, Current Streak, Lessons Completed (4 cards in 2x2 grid)
+  - Settings section: change reference language (navigates to existing screen), daily goal picker (1/2/3/5 chip selector), reset progress (destructive with Alert confirmation)
+  - Reset progress wipes lesson_progress, review_card, daily_streak tables, resets vocabulary learned=0, resets user XP to 0
+  - About section with app name, description, and version number
+  - resetAllProgress() DB helper added to src/database/db.ts
+  - i18n strings for all new UI in EN, ES, FR
+  - Data refreshes on screen focus via useFocusEffect
+- Files changed:
+  - app/(tabs)/profile/index.tsx (rewritten - full profile with stats, settings, about)
+  - src/database/db.ts (added resetAllProgress function)
+  - src/database/index.ts (exported resetAllProgress)
+  - src/i18n/locales/en.ts (profile i18n keys: username, level, dailyGoal, reset, about)
+  - src/i18n/locales/es.ts (profile i18n keys)
+  - src/i18n/locales/fr.ts (profile i18n keys)
+  - PRD.md (marked US-017 complete)
+- Learnings for future iterations:
+  - resetAllProgress() uses execSync with multiple statements to wipe all progress tables
+  - Editable username: useState for editingName + TextInput with autoFocus + checkmark save button
+  - Daily goal chips: array of options [1,2,3,5] rendered as Pressable chips with active/inactive styles
+  - Alert.alert() for destructive confirmation with cancel + destructive style buttons
+  - Stats grid: flexWrap with width '47%' + flexGrow:1 for responsive 2-column layout
+  - useFocusEffect reloads profile/streak/lessons on each focus for up-to-date stats
+  - APP_VERSION const matches app.json version; could import from Constants in future
 ---

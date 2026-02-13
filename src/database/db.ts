@@ -86,6 +86,18 @@ function initializeSchema(db: SQLite.SQLiteDatabase): void {
   `);
 }
 
+/** Reset all user progress (lesson progress, review cards, streak, XP) while keeping vocabulary and profile. */
+export function resetAllProgress(): void {
+  const db = getDatabase();
+  db.execSync(`
+    DELETE FROM review_card;
+    DELETE FROM lesson_progress;
+    DELETE FROM daily_streak;
+    UPDATE vocabulary_item SET learned = 0;
+    UPDATE user_profile SET total_xp = 0, current_level = 1;
+  `);
+}
+
 /** Close the database connection (for cleanup/testing). */
 export function closeDatabase(): void {
   if (_db) {

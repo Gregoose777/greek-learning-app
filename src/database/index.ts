@@ -1,5 +1,5 @@
 // Database initialization
-export { getDatabase, closeDatabase } from './db';
+export { getDatabase, closeDatabase, resetAllProgress } from './db';
 
 // Types
 export type {

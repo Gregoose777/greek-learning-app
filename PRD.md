@@ -259,12 +259,12 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want a profile screen to see my stats and adjust settings.
 
 **Acceptance Criteria:**
-- [ ] Profile tab shows: username (locally set), level, total XP, streak, lessons completed
-- [ ] Settings section: change reference language, daily goal (1/2/3/5 lessons), reset progress
-- [ ] Reset progress shows confirmation dialog before wiping data
-- [ ] "About" section with app version
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Profile tab shows: username (locally set), level, total XP, streak, lessons completed
+- [x] Settings section: change reference language, daily goal (1/2/3/5 lessons), reset progress
+- [x] Reset progress shows confirmation dialog before wiping data
+- [x] "About" section with app version
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

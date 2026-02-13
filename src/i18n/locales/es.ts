@@ -38,6 +38,27 @@ export default {
     changeLanguage: 'Cambiar Idioma',
     settings: 'Ajustes',
     referenceLanguage: 'Idioma de referencia',
+    // Stats section
+    username: 'Nombre de usuario',
+    usernamePlaceholder: 'Ingresa tu nombre',
+    level: 'Nivel',
+    totalXp: 'XP Total',
+    currentStreak: 'Racha',
+    lessonsCompleted: 'Lecciones Completadas',
+    // Daily goal setting
+    dailyGoal: 'Meta Diaria',
+    lessonsPerDay: '{{count}} lección/día',
+    lessonsPerDayPlural: '{{count}} lecciones/día',
+    // Reset progress
+    resetProgress: 'Restablecer Progreso',
+    resetConfirmTitle: '¿Restablecer todo el progreso?',
+    resetConfirmMessage: 'Esto borrará todo tu progreso en lecciones, vocabulario, tarjetas de repaso, rachas y XP. Esta acción no se puede deshacer.',
+    resetConfirmButton: 'Restablecer Todo',
+    // About
+    about: 'Acerca de',
+    appVersion: 'Versión {{version}}',
+    appName: 'HellenicaGo',
+    appDescription: 'Aprende griego moderno a tu ritmo',
   },
   // Language picker
   languagePicker: {
