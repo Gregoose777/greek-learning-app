@@ -92,13 +92,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a beginner user, I want a dedicated alphabet module so I can learn to read and write the Greek letters.
 
 **Acceptance Criteria:**
-- [ ] Alphabet screen accessible from Unit 1 or a dedicated section
-- [ ] All 24 Greek letters displayed with: uppercase, lowercase, name, pronunciation guide, example word
-- [ ] Tap a letter to see detail card with transliteration and audio placeholder
-- [ ] Quiz mode: show a letter, user picks correct pronunciation from 4 options
-- [ ] Progress tracked (letters learned / total)
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Alphabet screen accessible from Unit 1 or a dedicated section
+- [x] All 24 Greek letters displayed with: uppercase, lowercase, name, pronunciation guide, example word
+- [x] Tap a letter to see detail card with transliteration and audio placeholder
+- [x] Quiz mode: show a letter, user picks correct pronunciation from 4 options
+- [x] Progress tracked (letters learned / total)
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

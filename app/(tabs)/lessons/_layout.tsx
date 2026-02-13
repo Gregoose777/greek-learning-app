@@ -15,6 +15,7 @@ export default function LessonsLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: t('lessons.title') }} />
+      <Stack.Screen name="alphabet" options={{ title: t('alphabet.title') }} />
     </Stack>
   );
 }

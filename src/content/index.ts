@@ -24,3 +24,7 @@ export {
   getLessonById,
   getAllLessonsFlat,
 } from './seedLoader';
+
+// Alphabet data
+export { GREEK_ALPHABET, generateQuizOptions } from './alphabetData';
+export type { GreekLetter } from './alphabetData';
