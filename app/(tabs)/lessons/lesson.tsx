@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { colors, typography, spacing, borderRadius } from '../../../src/theme';
-import { ProgressBar, MultipleChoiceExercise, TranslationExercise, FillBlankExercise, LessonSummary } from '../../../src/components';
+import { ProgressBar, MultipleChoiceExercise, TranslationExercise, FillBlankExercise, MatchPairsExercise, LessonSummary } from '../../../src/components';
 import { getLessonById } from '../../../src/content';
 import type { Exercise, LocalizedString } from '../../../src/content/types';
 
@@ -148,6 +148,16 @@ function renderExercise(
     case 'fill_blank':
       return (
         <FillBlankExercise
+          key={key}
+          exercise={exercise}
+          lang={lang}
+          onAnswer={onAnswer}
+          t={t}
+        />
+      );
+    case 'match_pairs':
+      return (
+        <MatchPairsExercise
           key={key}
           exercise={exercise}
           lang={lang}

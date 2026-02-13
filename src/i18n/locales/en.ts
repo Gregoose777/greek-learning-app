@@ -93,6 +93,11 @@ export default {
     selectAnswer: 'Select an answer',
     typeAnswer: 'Type your answer...',
     chooseWord: 'Choose the correct word:',
+    matchPairs: 'Match the pairs',
+    greek: 'Greek',
+    translation: 'Translation',
+    perfectMatch: 'Perfect! All pairs matched!',
+    allMatched: 'All pairs matched!',
   },
   // Lesson summary
   lessonSummary: {

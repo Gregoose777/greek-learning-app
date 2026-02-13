@@ -153,13 +153,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want a matching exercise where I pair Greek words with their translations.
 
 **Acceptance Criteria:**
-- [ ] Two columns displayed: Greek words (left) and translations (right)
-- [ ] User taps one from each column to form a pair
-- [ ] Correct pairs highlight and fade/lock; incorrect pairs shake and reset
-- [ ] Exercise completes when all pairs matched
-- [ ] Minimum 4 pairs per exercise, maximum 6
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Two columns displayed: Greek words (left) and translations (right)
+- [x] User taps one from each column to form a pair
+- [x] Correct pairs highlight and fade/lock; incorrect pairs shake and reset
+- [x] Exercise completes when all pairs matched
+- [x] Minimum 4 pairs per exercise, maximum 6
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 
