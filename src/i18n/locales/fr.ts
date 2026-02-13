@@ -74,6 +74,14 @@ export default {
     markAsLearned: 'Marquer comme Appris',
     markedLearned: 'Appris !',
   },
+  // Unit map / lesson list
+  unitMap: {
+    lessonCount: '{{completed}} / {{total}} leçons terminées',
+    lesson: 'Leçon',
+    exerciseCount: '{{count}} exercices',
+    comingSoon: 'Exercices de leçon bientôt disponibles',
+    locked: 'Terminez la leçon précédente pour débloquer',
+  },
   // Common
   common: {
     loading: 'Chargement...',

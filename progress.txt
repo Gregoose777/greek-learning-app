@@ -30,6 +30,11 @@
 - LocalizedString { en, es, fr } used for all user-facing content text
 - getCourseContent() for full course; getLessonById() for specific lessons
 - Vocabulary inserted into DB on first load; exercises read from bundled TS
+- Alphabet data: src/content/alphabetData.ts; GREEK_ALPHABET array + generateQuizOptions()
+- FlatList with numColumns for grid layouts; use columnWrapperStyle for row spacing
+- StyleSheet.create infers literal types; use `ViewStyle` annotation for mutable style variables
+- Modal with presentationStyle="pageSheet" for slide-up detail cards
+- In-screen tab switcher pattern: useState<TabMode> + Pressable styled tabs
 
 ---
 
@@ -187,4 +192,64 @@
   - getCourseContent() returns the full course; getLessonById() for specific lessons
   - withTransactionSync wraps batch inserts for performance
   - Seed loader checks for existing records before inserting to avoid duplicates
+---
+
+## Iteration 6 - US-006: Greek Alphabet Learning Module
+- What was implemented:
+  - Complete Greek alphabet data file with all 24 letters (uppercase, lowercase, name, pronunciation, transliteration, example word with EN/ES/FR translations)
+  - Alphabet screen accessible from Lessons tab with link card
+  - Letter grid view (4 columns) showing all 24 letters with learned state indicators
+  - Letter detail modal with big letter display, pronunciation guide, transliteration, example word, and audio placeholder button
+  - Quiz mode: random letter presented, user picks correct pronunciation from 4 options, feedback shown, progress tracked
+  - Progress bar showing letters learned / total
+  - Tab switcher (Learn/Quiz) within alphabet screen
+  - Mark as learned toggle per letter
+  - i18n support for all UI strings in EN, ES, FR
+  - Quiz completion summary with score
+- Files changed:
+  - src/content/alphabetData.ts (new - 24 Greek letters data + quiz option generator)
+  - src/content/index.ts (added alphabet data exports)
+  - app/(tabs)/lessons/alphabet.tsx (new - full alphabet screen with grid, detail modal, quiz)
+  - app/(tabs)/lessons/_layout.tsx (registered alphabet screen in Stack)
+  - app/(tabs)/lessons/index.tsx (added alphabet section link card)
+  - src/i18n/locales/en.ts (alphabet translation keys)
+  - src/i18n/locales/es.ts (alphabet translation keys)
+  - src/i18n/locales/fr.ts (alphabet translation keys)
+  - PRD.md (marked US-006 complete)
+- Learnings for future iterations:
+  - StyleSheet.create infers literal types; use `ViewStyle` annotation for variables that switch between styles
+  - FlatList with numColumns + columnWrapperStyle for grid layouts
+  - Modal with presentationStyle="pageSheet" for slide-up detail cards
+  - generateQuizOptions() filters out letters with same pronunciation to avoid ambiguous distractors
+  - Letter progress is currently in-memory (useState Set); will need DB persistence for cross-session tracking
+  - Pattern: tab switcher within a screen using state + Pressable styled tabs
+  - Alphabet data lives in src/content/alphabetData.ts separate from lesson seed data
+---
+
+## Iteration 7 - US-007: Lesson List & Unit Map Screen
+- What was implemented:
+  - Lessons tab now shows a vertical scrollable list of units with lesson nodes
+  - Each unit card shows: localized title, unit number badge, completion count, progress bar with percentage
+  - Lesson nodes display three visual states: completed (green checkmark), unlocked (blue with order number), locked (grey with lock icon)
+  - Sequential unlock logic: first lesson always unlocked, others unlock when previous is completed
+  - Tapping an unlocked lesson navigates to lesson detail screen (placeholder for US-008)
+  - Locked lessons are not tappable (no Link wrapper)
+  - Progress reloads from SQLite each time screen is focused via useFocusEffect
+  - Alphabet section link preserved at top of screen
+  - i18n support for unit map strings in EN, ES, FR
+- Files changed:
+  - app/(tabs)/lessons/index.tsx (rewritten - unit map with lesson nodes)
+  - app/(tabs)/lessons/lesson.tsx (new - placeholder lesson screen)
+  - app/(tabs)/lessons/_layout.tsx (registered lesson screen in Stack)
+  - src/i18n/locales/en.ts (added unitMap translation keys)
+  - src/i18n/locales/es.ts (added unitMap translation keys)
+  - src/i18n/locales/fr.ts (added unitMap translation keys)
+  - PRD.md (marked US-007 complete)
+- Learnings for future iterations:
+  - useFocusEffect from expo-router reloads data when screen gains focus (good for progress tracking)
+  - getLessonStatus helper: uses global flat lesson array to determine sequential unlock order across units
+  - Link with `as any` type assertion needed for dynamic query param routes in expo-router
+  - Unit completion calculated as completed lessons / total lessons ratio
+  - getAllLessonProgress() returns all DB records; build a Map<lessonId, LessonProgress> for O(1) lookups
+  - Placeholder lesson screen created for navigation target; will be replaced by exercise engine in US-008
 ---

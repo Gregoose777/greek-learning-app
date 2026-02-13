@@ -74,6 +74,14 @@ export default {
     markAsLearned: 'Mark as Learned',
     markedLearned: 'Learned!',
   },
+  // Unit map / lesson list
+  unitMap: {
+    lessonCount: '{{completed}} / {{total}} lessons completed',
+    lesson: 'Lesson',
+    exerciseCount: '{{count}} exercises',
+    comingSoon: 'Lesson exercises coming soon',
+    locked: 'Complete the previous lesson to unlock',
+  },
   // Common
   common: {
     loading: 'Loading...',

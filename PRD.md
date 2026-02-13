@@ -107,14 +107,14 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want to see a map of all units and lessons so I know my learning path and what to do next.
 
 **Acceptance Criteria:**
-- [ ] Lessons tab shows a vertical scrollable list of units
-- [ ] Each unit shows: title, number of lessons, completion percentage
-- [ ] Lessons within a unit shown as nodes (locked/unlocked/completed states)
-- [ ] First lesson of first unit unlocked by default; others unlock sequentially
-- [ ] Tapping an unlocked lesson navigates to the lesson screen
-- [ ] Locked lessons show a lock icon and are not tappable
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Lessons tab shows a vertical scrollable list of units
+- [x] Each unit shows: title, number of lessons, completion percentage
+- [x] Lessons within a unit shown as nodes (locked/unlocked/completed states)
+- [x] First lesson of first unit unlocked by default; others unlock sequentially
+- [x] Tapping an unlocked lesson navigates to the lesson screen
+- [x] Locked lessons show a lock icon and are not tappable
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 
