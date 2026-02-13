@@ -3,4 +3,6 @@ export { Card } from './Card';
 export { ProgressBar } from './ProgressBar';
 export { Badge } from './Badge';
 export { MultipleChoiceExercise } from './MultipleChoiceExercise';
+export { TranslationExercise } from './TranslationExercise';
+export { FillBlankExercise } from './FillBlankExercise';
 export { LessonSummary } from './LessonSummary';

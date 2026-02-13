@@ -91,6 +91,8 @@ export default {
     incorrect: 'Incorrect',
     correctAnswerWas: 'Correct answer: {{answer}}',
     selectAnswer: 'Select an answer',
+    typeAnswer: 'Type your answer...',
+    chooseWord: 'Choose the correct word:',
   },
   // Lesson summary
   lessonSummary: {

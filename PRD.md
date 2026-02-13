@@ -138,13 +138,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want translation and fill-in-the-blank exercises so I practice active recall.
 
 **Acceptance Criteria:**
-- [ ] Translation exercise: shows a sentence, user types translation in text input
-- [ ] Answer checked with basic fuzzy matching (ignore accents, case)
-- [ ] Fill-in-the-blank: sentence with a gap, user picks from word bank or types
-- [ ] Both exercise types integrate into the existing lesson flow from US-008
-- [ ] Correct/incorrect feedback shown consistently
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Translation exercise: shows a sentence, user types translation in text input
+- [x] Answer checked with basic fuzzy matching (ignore accents, case)
+- [x] Fill-in-the-blank: sentence with a gap, user picks from word bank or types
+- [x] Both exercise types integrate into the existing lesson flow from US-008
+- [x] Correct/incorrect feedback shown consistently
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

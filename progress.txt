@@ -38,7 +38,10 @@
 - Exercise engine: useState currentIndex + exerciseKey; key prop forces child re-mount to reset state
 - ListeningExercise shares shape with MultipleChoiceExercise; reuse MC component for both
 - XP formula: base 10 + Math.round(accuracy * 5) for up to 15 XP per lesson
-- Exercise components: MultipleChoiceExercise, LessonSummary in src/components/
+- Exercise components: MultipleChoiceExercise, TranslationExercise, FillBlankExercise, LessonSummary in src/components/
+- Fuzzy matching: normalize(NFD) + strip diacritics + lowercase for accent/case-insensitive comparison
+- FillBlankExercise supports word bank (tap chips) or text input fallback
+- ViewStyle/TextStyle annotations needed when mutable variables switch between StyleSheet styles
 
 ---
 
@@ -289,4 +292,33 @@
   - XP formula: base 10 + Math.round(accuracy * 5) for up to 15 XP per lesson
   - SkipExercise component handles unsupported exercise types without blocking lesson flow
   - handleAnswer tracks newCorrect locally since setState is async (can't rely on correctCount in same callback)
+---
+
+## Iteration 9 - US-009: Lesson Exercise Engine — Translation & Fill-in-the-Blank
+- What was implemented:
+  - TranslationExercise component: shows prompt + Greek text, user types answer in TextInput
+  - Fuzzy matching: normalize() strips accents (NFD + diacritic removal), lowercases, trims, collapses spaces
+  - checkAnswer compares normalized user input against all acceptedAnswers from exercise data
+  - FillBlankExercise component: shows sentence with blank + word bank (Pressable chips) or text input fallback
+  - Word bank mode: tap to select/deselect word, selected word highlighted in primary color
+  - Text input fallback: same fuzzy matching as translation when no wordBank provided
+  - Both exercise types integrated into lesson engine renderExercise() switch statement
+  - Consistent feedback UI: green/red borders, checkmark/X icons, correct answer shown on miss
+  - Check → Continue button flow matches existing MultipleChoiceExercise pattern
+  - i18n strings added: typeAnswer, chooseWord in EN, ES, FR
+- Files changed:
+  - src/components/TranslationExercise.tsx (new)
+  - src/components/FillBlankExercise.tsx (new)
+  - src/components/index.ts (added exports)
+  - app/(tabs)/lessons/lesson.tsx (integrated translation + fill_blank cases in renderExercise)
+  - src/i18n/locales/en.ts (typeAnswer, chooseWord keys)
+  - src/i18n/locales/es.ts (typeAnswer, chooseWord keys)
+  - src/i18n/locales/fr.ts (typeAnswer, chooseWord keys)
+  - PRD.md (marked US-009 complete)
+- Learnings for future iterations:
+  - StyleSheet.create literal type issue: use ViewStyle/TextStyle annotations for mutable style variables
+  - Fuzzy matching pattern: normalize(NFD) + strip \u0300-\u036f range removes all combining diacritics
+  - Fill-blank supports dual input modes: wordBank (tap chips) or free-text (TextInput)
+  - Exercise components follow same structure: prompt, input area, feedback banner, check/continue button
+  - Seed data already has translation and fill_blank exercises in Lesson 3-5; no new seed data needed
 ---

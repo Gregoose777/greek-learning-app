@@ -91,6 +91,8 @@ export default {
     incorrect: 'Incorrect',
     correctAnswerWas: 'Bonne réponse : {{answer}}',
     selectAnswer: 'Sélectionnez une réponse',
+    typeAnswer: 'Tapez votre réponse...',
+    chooseWord: 'Choisissez le bon mot :',
   },
   // Lesson summary
   lessonSummary: {
