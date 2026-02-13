@@ -140,6 +140,26 @@ export default {
     emptyTitle: 'Pas encore de vocabulaire',
     emptySubtitle: 'Terminez des leçons pour construire votre collection de vocabulaire',
   },
+  // Spaced Repetition System
+  srs: {
+    cardsDue: '{{count}} cartes à réviser',
+    startReview: 'Appuyez pour commencer la révision',
+    sessionTitle: 'Session de Révision',
+    cardOf: '{{current}} sur {{total}}',
+    tapToReveal: 'Appuyez pour révéler la réponse',
+    translation: 'Traduction',
+    howWellDidYouKnow: 'Quelle était votre connaissance ?',
+    again: 'Encore',
+    hard: 'Difficile',
+    good: 'Bien',
+    easy: 'Facile',
+    sessionComplete: 'Révision Terminée !',
+    cardsReviewed: '{{count}} cartes révisées',
+    finish: 'Terminer',
+    noCardsDue: 'Aucune carte à réviser !',
+    allCaughtUp: 'Vous êtes à jour. Revenez plus tard pour d\'autres révisions.',
+    backToReview: 'Retour aux Révisions',
+  },
   // Common
   common: {
     loading: 'Chargement...',

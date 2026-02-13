@@ -228,14 +228,14 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want a spaced repetition system so I review words at optimal intervals for long-term retention.
 
 **Acceptance Criteria:**
-- [ ] SM-2 (or simplified Leitner) algorithm implemented
-- [ ] Each vocabulary item has: easiness factor, interval, next review date
-- [ ] Review tab shows count of cards due today
-- [ ] Review session: show Greek word → user self-rates (Again / Hard / Good / Easy)
-- [ ] Rating updates interval and next review date per algorithm
-- [ ] Session ends when all due cards reviewed; shows summary
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] SM-2 (or simplified Leitner) algorithm implemented
+- [x] Each vocabulary item has: easiness factor, interval, next review date
+- [x] Review tab shows count of cards due today
+- [x] Review session: show Greek word → user self-rates (Again / Hard / Good / Easy)
+- [x] Rating updates interval and next review date per algorithm
+- [x] Session ends when all due cards reviewed; shows summary
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

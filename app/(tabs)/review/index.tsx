@@ -8,7 +8,7 @@ import {
   Pressable,
   Modal,
 } from 'react-native';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect, Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../../src/theme';
@@ -16,6 +16,8 @@ import { Card } from '../../../src/components';
 import {
   getLearnedVocabularyItems,
   searchVocabularyItems,
+  ensureReviewCardsExist,
+  getDueReviewCount,
 } from '../../../src/database';
 import type { VocabularyItem } from '../../../src/database';
 
@@ -34,10 +36,13 @@ export default function ReviewScreen() {
   const [vocabulary, setVocabulary] = useState<VocabularyItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedWord, setSelectedWord] = useState<VocabularyItem | null>(null);
+  const [dueCount, setDueCount] = useState(0);
 
   useFocusEffect(
     useCallback(() => {
       loadVocabulary();
+      ensureReviewCardsExist();
+      setDueCount(getDueReviewCount());
     }, [])
   );
 
@@ -73,6 +78,26 @@ export default function ReviewScreen() {
 
   return (
     <View style={styles.container}>
+      {/* Due cards banner */}
+      {dueCount > 0 && (
+        <Link href="/(tabs)/review/session" asChild>
+          <Pressable>
+            <Card variant="elevated" style={styles.dueCard}>
+              <View style={styles.dueRow}>
+                <View style={styles.dueIcon}>
+                  <Ionicons name="albums" size={24} color={colors.textOnPrimary} />
+                </View>
+                <View style={styles.dueInfo}>
+                  <Text style={styles.dueTitle}>{t('srs.cardsDue', { count: dueCount })}</Text>
+                  <Text style={styles.dueSubtitle}>{t('srs.startReview')}</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={24} color={colors.textOnPrimary} />
+              </View>
+            </Card>
+          </Pressable>
+        </Link>
+      )}
+
       {/* Search bar */}
       <View style={styles.searchContainer}>
         <Ionicons name="search" size={20} color={colors.textSecondary} style={styles.searchIcon} />
@@ -186,6 +211,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     padding: spacing.md,
+  },
+  // Due cards banner
+  dueCard: {
+    marginBottom: spacing.md,
+    padding: spacing.md,
+    backgroundColor: colors.primary,
+  },
+  dueRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dueIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: spacing.md,
+  },
+  dueInfo: {
+    flex: 1,
+  },
+  dueTitle: {
+    ...typography.heading3,
+    color: colors.textOnPrimary,
+  },
+  dueSubtitle: {
+    ...typography.caption,
+    color: 'rgba(255,255,255,0.8)',
+    marginTop: 2,
   },
   // Search bar
   searchContainer: {

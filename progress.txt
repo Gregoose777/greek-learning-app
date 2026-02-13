@@ -445,3 +445,34 @@
   - ScrollView with contentContainerStyle for scrollable dashboard; paddingBottom for safe area
   - Daily goal stored in UserProfile.dailyGoal (default 1); Profile settings screen will make it configurable
 ---
+
+## Iteration 14 - US-014: Vocabulary Collection & Flashcard View
+- What was implemented:
+  - Review tab rewritten as vocabulary collection with FlatList of learned words
+  - Each word card shows: Greek text, transliteration, translation in current reference language
+  - Search bar with real-time filtering using SQL LIKE query on greek, transliteration, and translation columns
+  - Clear button on search input; word count display
+  - Tap a word to open detail modal (pageSheet) with large Greek text, transliteration, translation, category, example sentence, pronunciation guide
+  - Empty state with different messages for no vocabulary vs. no search results
+  - markVocabularyLearnedByLesson() DB helper: bulk updates vocabulary_item.learned=1 for a lesson
+  - searchVocabularyItems() DB helper: parameterized LIKE query filtered by lang column
+  - Vocabulary auto-marked as learned in saveLessonCompletion() on lesson.tsx
+  - i18n strings for vocabulary UI in EN, ES, FR
+- Files changed:
+  - app/(tabs)/review/index.tsx (rewritten - vocabulary list, search, detail modal)
+  - app/(tabs)/lessons/lesson.tsx (added markVocabularyLearnedByLesson import + call)
+  - src/database/vocabularyItem.ts (added markVocabularyLearnedByLesson, searchVocabularyItems)
+  - src/database/index.ts (exported new helpers)
+  - src/i18n/locales/en.ts (vocabulary i18n keys)
+  - src/i18n/locales/es.ts (vocabulary i18n keys)
+  - src/i18n/locales/fr.ts (vocabulary i18n keys)
+  - PRD.md (marked US-014 complete)
+- Learnings for future iterations:
+  - Vocabulary items already seeded with learned=0; markVocabularyLearnedByLesson() flips to 1 on lesson completion
+  - getLearnedVocabularyItems() returns only learned=1 items for the Review tab
+  - searchVocabularyItems uses dynamic column name (translation_${lang}) since SQL LIKE doesn't support parameter for column names
+  - getTranslation() helper switches on lang to return the correct translation field from VocabularyItem
+  - Modal with presentationStyle="pageSheet" reused from alphabet pattern for word detail
+  - useFocusEffect reloads vocabulary when Review tab gains focus
+  - FlatList keyExtractor needs string return (item.id.toString())
+---

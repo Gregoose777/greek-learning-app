@@ -140,6 +140,26 @@ export default {
     emptyTitle: 'Sin vocabulario aún',
     emptySubtitle: 'Completa lecciones para construir tu colección de vocabulario',
   },
+  // Spaced Repetition System
+  srs: {
+    cardsDue: '{{count}} tarjetas pendientes de repaso',
+    startReview: 'Toca para iniciar sesión de repaso',
+    sessionTitle: 'Sesión de Repaso',
+    cardOf: '{{current}} de {{total}}',
+    tapToReveal: 'Toca para revelar la respuesta',
+    translation: 'Traducción',
+    howWellDidYouKnow: '¿Qué tan bien lo sabías?',
+    again: 'Otra vez',
+    hard: 'Difícil',
+    good: 'Bien',
+    easy: 'Fácil',
+    sessionComplete: '¡Repaso Completo!',
+    cardsReviewed: '{{count}} tarjetas repasadas',
+    finish: 'Terminar',
+    noCardsDue: '¡Sin tarjetas pendientes!',
+    allCaughtUp: 'Estás al día. Vuelve más tarde para más repasos.',
+    backToReview: 'Volver a Repasar',
+  },
   // Common
   common: {
     loading: 'Cargando...',

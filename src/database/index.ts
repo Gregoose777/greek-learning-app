@@ -81,3 +81,12 @@ export {
   recordLessonForStreak,
   checkStreakOnAppOpen,
 } from './streakLogic';
+
+// SRS (Spaced Repetition) business logic
+export {
+  processReview,
+  ensureReviewCardsExist,
+  getDueReviewCount,
+  getDueCardsForSession,
+} from './srsLogic';
+export type { SrsRating } from './srsLogic';

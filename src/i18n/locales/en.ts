@@ -140,6 +140,26 @@ export default {
     emptyTitle: 'No vocabulary yet',
     emptySubtitle: 'Complete lessons to build your vocabulary collection',
   },
+  // Spaced Repetition System
+  srs: {
+    cardsDue: '{{count}} cards due for review',
+    startReview: 'Tap to start review session',
+    sessionTitle: 'Review Session',
+    cardOf: '{{current}} of {{total}}',
+    tapToReveal: 'Tap to reveal answer',
+    translation: 'Translation',
+    howWellDidYouKnow: 'How well did you know this?',
+    again: 'Again',
+    hard: 'Hard',
+    good: 'Good',
+    easy: 'Easy',
+    sessionComplete: 'Review Complete!',
+    cardsReviewed: '{{count}} cards reviewed',
+    finish: 'Finish',
+    noCardsDue: 'No cards due!',
+    allCaughtUp: 'You\'re all caught up. Come back later for more reviews.',
+    backToReview: 'Back to Review',
+  },
   // Common
   common: {
     loading: 'Loading...',

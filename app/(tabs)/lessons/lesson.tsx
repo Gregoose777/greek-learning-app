@@ -14,6 +14,7 @@ import {
   updateUserProfile,
   recordLessonForStreak,
   markVocabularyLearnedByLesson,
+  ensureReviewCardsExist,
 } from '../../../src/database';
 
 export default function LessonScreen() {
@@ -82,8 +83,9 @@ export default function LessonScreen() {
       }
     }
 
-    // Mark vocabulary from this lesson as learned
+    // Mark vocabulary from this lesson as learned + create review cards
     markVocabularyLearnedByLesson(lessonId);
+    ensureReviewCardsExist();
 
     // Record streak activity
     recordLessonForStreak();

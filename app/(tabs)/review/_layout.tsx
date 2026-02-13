@@ -15,6 +15,7 @@ export default function ReviewLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: t('review.title') }} />
+      <Stack.Screen name="session" options={{ title: t('srs.sessionTitle') }} />
     </Stack>
   );
 }
