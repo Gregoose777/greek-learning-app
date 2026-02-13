@@ -42,6 +42,10 @@
 - Fuzzy matching: normalize(NFD) + strip diacritics + lowercase for accent/case-insensitive comparison
 - FillBlankExercise supports word bank (tap chips) or text input fallback
 - ViewStyle/TextStyle annotations needed when mutable variables switch between StyleSheet styles
+- Streak logic: src/database/streakLogic.ts; getOrCreateStreak(), recordLessonForStreak(), checkStreakOnAppOpen()
+- DailyStreak is singleton; ISO date strings (YYYY-MM-DD) for day comparison
+- Freeze banking: 1 freeze per 7-day milestone; freeze covers exactly 1 missed day (gap === 2)
+- useFocusEffect on Home screen checks/resets broken streaks on app open
 
 ---
 
@@ -377,4 +381,37 @@
   - useRef for timers avoids re-render; Date.now() for start, delta on completion
   - LessonProgress.completed = true is what getLessonStatus() checks to unlock next lesson
   - With 3 stat columns, heading2 (fontSize 22) fits better than heading1 (fontSize 28)
+---
+
+## Iteration 12 - US-012: Daily Streak System
+- What was implemented:
+  - Streak business logic module (src/database/streakLogic.ts) with:
+    - getOrCreateStreak(): initializes singleton streak record if needed
+    - recordLessonForStreak(): called on lesson completion, increments/resets streak
+    - checkStreakOnAppOpen(): resets broken streaks when user opens app
+  - Streak logic: consecutive days increment, missed day resets to 0
+  - Streak freeze: 1 freeze banked per 7-day streak milestone (7, 14, 21, etc.)
+  - Freeze protects exactly 1 missed day (gap of 2 days between last activity and today)
+  - Home tab displays streak card with flame icon, current streak, longest streak, and freeze count
+  - Streak card uses Ionicons flame (active=secondary gold, inactive=disabled gray) and snow (freezes)
+  - Streak recorded automatically on lesson completion via recordLessonForStreak() in saveLessonCompletion
+  - checkStreakOnAppOpen() called via useFocusEffect on Home screen to detect broken streaks
+  - i18n strings for streak UI in EN, ES, FR
+- Files changed:
+  - src/database/streakLogic.ts (new - streak business logic)
+  - src/database/index.ts (added streak logic exports)
+  - app/(tabs)/lessons/lesson.tsx (added recordLessonForStreak call in saveLessonCompletion)
+  - app/(tabs)/home/index.tsx (rewritten - streak card with flame icon, stats, freeze info)
+  - src/i18n/locales/en.ts (streak i18n keys)
+  - src/i18n/locales/es.ts (streak i18n keys)
+  - src/i18n/locales/fr.ts (streak i18n keys)
+  - PRD.md (marked US-012 complete)
+- Learnings for future iterations:
+  - Streak logic lives in src/database/streakLogic.ts separate from CRUD helpers
+  - DailyStreak is singleton pattern: getOrCreateStreak() ensures exactly one record
+  - ISO date string comparison (YYYY-MM-DD) works for day-level equality checks
+  - daysBetween() helper calculates gap for freeze eligibility (gap === 2 means 1 missed day)
+  - Freeze banking: Math.floor(newStreak/7) > Math.floor(oldStreak/7) detects crossing 7-day multiples
+  - useFocusEffect on Home tab is the right place to check/update streak state on app open
+  - Flame icon from Ionicons ("flame") + snow icon ("snow") for freezes
 ---

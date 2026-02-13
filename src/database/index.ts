@@ -71,3 +71,10 @@ export {
   updateDailyStreak,
   deleteDailyStreak,
 } from './dailyStreak';
+
+// Streak business logic
+export {
+  getOrCreateStreak,
+  recordLessonForStreak,
+  checkStreakOnAppOpen,
+} from './streakLogic';

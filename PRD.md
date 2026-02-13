@@ -183,13 +183,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want a daily streak counter so I'm motivated to practice every day.
 
 **Acceptance Criteria:**
-- [ ] Streak increments when user completes at least 1 lesson per day
-- [ ] Streak resets to 0 if a day is missed
-- [ ] Current streak and longest streak stored locally
-- [ ] Streak displayed prominently on Home tab (flame icon + number)
-- [ ] Streak freeze: user can "bank" 1 freeze per 7-day streak (protects 1 missed day)
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Streak increments when user completes at least 1 lesson per day
+- [x] Streak resets to 0 if a day is missed
+- [x] Current streak and longest streak stored locally
+- [x] Streak displayed prominently on Home tab (flame icon + number)
+- [x] Streak freeze: user can "bank" 1 freeze per 7-day streak (protects 1 missed day)
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

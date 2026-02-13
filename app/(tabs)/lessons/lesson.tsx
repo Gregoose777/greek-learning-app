@@ -12,6 +12,7 @@ import {
   updateLessonProgress,
   getUserProfile,
   updateUserProfile,
+  recordLessonForStreak,
 } from '../../../src/database';
 
 export default function LessonScreen() {
@@ -79,6 +80,9 @@ export default function LessonScreen() {
         });
       }
     }
+
+    // Record streak activity
+    recordLessonForStreak();
 
     setSavedXp(xpEarned);
     setSavedTimeSpent(timeSpentSeconds);

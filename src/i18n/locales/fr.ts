@@ -110,6 +110,13 @@ export default {
     continueLearning: 'Continuer',
     retryLesson: 'Réessayer',
   },
+  // Streak
+  streak: {
+    dayStreak: 'Jours consécutifs',
+    longest: 'Record',
+    freezes: 'Protections',
+    freezeHint: 'La protection de série couvre 1 jour manqué',
+  },
   // Common
   common: {
     loading: 'Chargement...',
