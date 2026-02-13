@@ -82,6 +82,26 @@ export default {
     comingSoon: 'Lesson exercises coming soon',
     locked: 'Complete the previous lesson to unlock',
   },
+  // Lesson exercise engine
+  exercise: {
+    questionOf: '{{current}} of {{total}}',
+    checkAnswer: 'Check',
+    continue: 'Continue',
+    correct: 'Correct!',
+    incorrect: 'Incorrect',
+    correctAnswerWas: 'Correct answer: {{answer}}',
+    selectAnswer: 'Select an answer',
+  },
+  // Lesson summary
+  lessonSummary: {
+    title: 'Lesson Complete!',
+    score: 'Score',
+    accuracy: '{{percent}}% Accuracy',
+    xpEarned: 'XP Earned',
+    questionsCorrect: '{{correct}} of {{total}} correct',
+    continueLearning: 'Continue',
+    retryLesson: 'Try Again',
+  },
   // Common
   common: {
     loading: 'Loading...',

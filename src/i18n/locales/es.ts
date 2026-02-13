@@ -82,6 +82,26 @@ export default {
     comingSoon: 'Ejercicios de lección próximamente',
     locked: 'Completa la lección anterior para desbloquear',
   },
+  // Lesson exercise engine
+  exercise: {
+    questionOf: '{{current}} de {{total}}',
+    checkAnswer: 'Comprobar',
+    continue: 'Continuar',
+    correct: '¡Correcto!',
+    incorrect: 'Incorrecto',
+    correctAnswerWas: 'Respuesta correcta: {{answer}}',
+    selectAnswer: 'Selecciona una respuesta',
+  },
+  // Lesson summary
+  lessonSummary: {
+    title: '¡Lección Completa!',
+    score: 'Puntuación',
+    accuracy: '{{percent}}% de Precisión',
+    xpEarned: 'XP Ganados',
+    questionsCorrect: '{{correct}} de {{total}} correctas',
+    continueLearning: 'Continuar',
+    retryLesson: 'Intentar de Nuevo',
+  },
   // Common
   common: {
     loading: 'Cargando...',

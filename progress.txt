@@ -35,6 +35,10 @@
 - StyleSheet.create infers literal types; use `ViewStyle` annotation for mutable style variables
 - Modal with presentationStyle="pageSheet" for slide-up detail cards
 - In-screen tab switcher pattern: useState<TabMode> + Pressable styled tabs
+- Exercise engine: useState currentIndex + exerciseKey; key prop forces child re-mount to reset state
+- ListeningExercise shares shape with MultipleChoiceExercise; reuse MC component for both
+- XP formula: base 10 + Math.round(accuracy * 5) for up to 15 XP per lesson
+- Exercise components: MultipleChoiceExercise, LessonSummary in src/components/
 
 ---
 
@@ -252,4 +256,37 @@
   - Unit completion calculated as completed lessons / total lessons ratio
   - getAllLessonProgress() returns all DB records; build a Map<lessonId, LessonProgress> for O(1) lookups
   - Placeholder lesson screen created for navigation target; will be replaced by exercise engine in US-008
+---
+
+## Iteration 8 - US-008: Lesson Exercise Engine — Multiple Choice
+- What was implemented:
+  - Full lesson exercise engine replacing placeholder lesson screen
+  - Exercises displayed sequentially with progress bar at top and question counter
+  - MultipleChoiceExercise component: prompt, 4 options, select-then-check flow
+  - Correct answer highlights green with checkmark, wrong answer highlights red with X
+  - User must select an answer and press "Check" before proceeding (cannot skip)
+  - Feedback banner shows "Correct!" / "Incorrect" with correct answer shown on miss
+  - After last exercise, lesson summary screen with trophy icon, XP earned (base 10 + up to 5 accuracy bonus), accuracy %, and correct/total count
+  - Retry button available if accuracy < 100%
+  - Listening exercises rendered as multiple choice (same structure)
+  - Unsupported exercise types (translation, fill_blank, match_pairs) show skip placeholder
+  - exerciseKey state forces re-mount of exercise components between questions
+  - i18n strings added for exercise engine and lesson summary in EN, ES, FR
+  - LessonSummary component uses Card and Button from design system
+- Files changed:
+  - app/(tabs)/lessons/lesson.tsx (rewritten - full exercise engine)
+  - src/components/MultipleChoiceExercise.tsx (new - MC exercise component)
+  - src/components/LessonSummary.tsx (new - lesson completion summary)
+  - src/components/index.ts (added new component exports)
+  - src/i18n/locales/en.ts (exercise + lessonSummary keys)
+  - src/i18n/locales/es.ts (exercise + lessonSummary keys)
+  - src/i18n/locales/fr.ts (exercise + lessonSummary keys)
+  - PRD.md (marked US-008 complete)
+- Learnings for future iterations:
+  - Exercise engine pattern: useState for currentIndex + exerciseKey; key forces re-mount to reset child state
+  - useCallback with setTimeout(300ms) provides brief delay for feedback visibility before advancing
+  - ListeningExercise has same shape as MultipleChoiceExercise (prompt, options, correctIndex) so can reuse MC component
+  - XP formula: base 10 + Math.round(accuracy * 5) for up to 15 XP per lesson
+  - SkipExercise component handles unsupported exercise types without blocking lesson flow
+  - handleAnswer tracks newCorrect locally since setState is async (can't rely on correctCount in same callback)
 ---

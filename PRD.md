@@ -123,13 +123,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want to answer multiple choice questions during a lesson so I can test my knowledge.
 
 **Acceptance Criteria:**
-- [ ] Lesson screen displays exercises sequentially with a progress bar at top
-- [ ] Multiple choice exercise shows: prompt (Greek or reference language), 4 answer options
-- [ ] Correct answer highlights green, wrong answer highlights red with correct shown
-- [ ] User cannot proceed without answering
-- [ ] After last exercise, show lesson summary (score, XP earned)
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Lesson screen displays exercises sequentially with a progress bar at top
+- [x] Multiple choice exercise shows: prompt (Greek or reference language), 4 answer options
+- [x] Correct answer highlights green, wrong answer highlights red with correct shown
+- [x] User cannot proceed without answering
+- [x] After last exercise, show lesson summary (score, XP earned)
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 
