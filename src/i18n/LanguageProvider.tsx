@@ -6,6 +6,7 @@ import {
   changeLanguage as changeI18nLanguage,
   type SupportedLanguage,
 } from './index';
+import { initializeSeedData } from '../content/seedLoader';
 
 interface LanguageContextValue {
   language: SupportedLanguage;
@@ -37,6 +38,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       const stored = await getStoredLanguage();
       setIsFirstLaunch(stored === null);
       await initI18n(stored ?? undefined);
+      await initializeSeedData();
       setIsReady(true);
     })();
   }, []);

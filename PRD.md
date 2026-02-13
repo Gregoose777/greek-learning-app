@@ -77,13 +77,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a developer, I need a structured content format and initial seed data so the app has lessons to display.
 
 **Acceptance Criteria:**
-- [ ] Content schema defined: `Course > Unit > Lesson > Exercise`
-- [ ] Each lesson has: id, unit, order, title (in EN/ES/FR), type, exercises[]
-- [ ] Exercise types defined: `multiple_choice`, `translation`, `fill_blank`, `match_pairs`, `listening`
-- [ ] Seed data created for Unit 1 "Alphabet & Basics" with at least 5 lessons
-- [ ] Seed data includes translations in all 3 reference languages
-- [ ] Seed data loads successfully on app start
-- [ ] Typecheck passes
+- [x] Content schema defined: `Course > Unit > Lesson > Exercise`
+- [x] Each lesson has: id, unit, order, title (in EN/ES/FR), type, exercises[]
+- [x] Exercise types defined: `multiple_choice`, `translation`, `fill_blank`, `match_pairs`, `listening`
+- [x] Seed data created for Unit 1 "Alphabet & Basics" with at least 5 lessons
+- [x] Seed data includes translations in all 3 reference languages
+- [x] Seed data loads successfully on app start
+- [x] Typecheck passes
 
 ---
 

@@ -24,6 +24,12 @@
 - DB schema uses snake_case columns; TypeScript models use camelCase; row-to-model mappers convert between them
 - Singleton DB pattern: getDatabase() lazily initializes and returns cached instance
 - CRUD pattern: typed Row interface → rowToModel mapper → parameterized queries with ? placeholders
+- Content schema: Course > Unit > Lesson > Exercise hierarchy in src/content/
+- Seed data versioned via AsyncStorage; bump CURRENT_SEED_VERSION to re-seed
+- Exercise types: multiple_choice, translation, fill_blank, match_pairs, listening
+- LocalizedString { en, es, fr } used for all user-facing content text
+- getCourseContent() for full course; getLessonById() for specific lessons
+- Vocabulary inserted into DB on first load; exercises read from bundled TS
 
 ---
 
@@ -147,4 +153,38 @@
   - First-launch flow uses router.replace('/language-picker') from root layout useEffect
   - --legacy-peer-deps needed for AsyncStorage install (react-dom peer dep conflict)
   - expo-router Stack.Screen registered in _layout.tsx even for dynamically navigated routes
+---
+
+## Iteration 5 - US-005: Lesson Content Data Structure & Seed Data
+- What was implemented:
+  - Content schema types: Course > Unit > Lesson > Exercise hierarchy (src/content/types.ts)
+  - 5 exercise types: multiple_choice, translation, fill_blank, match_pairs, listening
+  - LocalizedString type for EN/ES/FR translations on all content
+  - Seed data for Unit 1 "Alphabet & Basics" with 5 lessons (src/content/seedData.ts):
+    1. First Greek Letters (Α-Ε)
+    2. More Greek Letters (Ζ-Κ)
+    3. Basic Greetings
+    4. Introducing Yourself
+    5. Numbers 1-5
+  - Each lesson has vocabulary items and 4-5 exercises of varied types
+  - Seed data loader (src/content/seedLoader.ts) with version checking via AsyncStorage
+  - Vocabulary auto-inserted into SQLite database on first launch
+  - Content accessors: getCourseContent(), getUnitById(), getLessonById(), getAllLessonsFlat()
+  - Barrel export (src/content/index.ts)
+  - Integrated initializeSeedData() into LanguageProvider startup
+- Files changed:
+  - src/content/types.ts (new - content schema types)
+  - src/content/seedData.ts (new - seed data for Unit 1)
+  - src/content/seedLoader.ts (new - data loader + content accessors)
+  - src/content/index.ts (new - barrel export)
+  - src/i18n/LanguageProvider.tsx (added initializeSeedData call on startup)
+  - PRD.md (marked US-005 complete)
+- Learnings for future iterations:
+  - Content lives in src/content/; types, seed data, and loader are separate files
+  - Seed data is versioned via AsyncStorage key; bump CURRENT_SEED_VERSION to re-seed
+  - Exercise content uses LocalizedString for all user-facing text (prompt, options, translations)
+  - Vocabulary is inserted into DB on first load; exercises are read directly from bundled TS
+  - getCourseContent() returns the full course; getLessonById() for specific lessons
+  - withTransactionSync wraps batch inserts for performance
+  - Seed loader checks for existing records before inserting to avoid duplicates
 ---
