@@ -183,6 +183,24 @@ export default {
     allCaughtUp: 'You\'re all caught up. Come back later for more reviews.',
     backToReview: 'Back to Review',
   },
+  // Onboarding
+  onboarding: {
+    appName: 'HellenicaGo',
+    welcomeTitle: 'Learn Modern Greek',
+    welcomeSubtitle: 'Master Greek from alphabet to conversation, at your own pace.',
+    feature1: 'Structured lessons from beginner to advanced',
+    feature2: 'Fun quizzes and interactive exercises',
+    feature3: 'Audio pronunciation for every word',
+    languageTitle: 'Choose Your Language',
+    languageSubtitle: 'Select the language for instructions and translations',
+    goalTitle: 'Set Your Daily Goal',
+    goalSubtitle: 'How many lessons do you want to complete each day?',
+    lessonPerDay: 'lesson per day',
+    lessonsPerDay: 'lessons per day',
+    next: 'Next',
+    skip: 'Skip',
+    start: 'Start Learning',
+  },
   // Common
   common: {
     loading: 'Loading...',

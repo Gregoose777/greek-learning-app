@@ -183,6 +183,24 @@ export default {
     allCaughtUp: 'Estás al día. Vuelve más tarde para más repasos.',
     backToReview: 'Volver a Repasar',
   },
+  // Onboarding
+  onboarding: {
+    appName: 'HellenicaGo',
+    welcomeTitle: 'Aprende Griego Moderno',
+    welcomeSubtitle: 'Domina el griego desde el alfabeto hasta la conversación, a tu ritmo.',
+    feature1: 'Lecciones estructuradas de principiante a avanzado',
+    feature2: 'Cuestionarios divertidos y ejercicios interactivos',
+    feature3: 'Pronunciación de audio para cada palabra',
+    languageTitle: 'Elige Tu Idioma',
+    languageSubtitle: 'Selecciona el idioma para instrucciones y traducciones',
+    goalTitle: 'Establece Tu Meta Diaria',
+    goalSubtitle: '¿Cuántas lecciones quieres completar cada día?',
+    lessonPerDay: 'lección por día',
+    lessonsPerDay: 'lecciones por día',
+    next: 'Siguiente',
+    skip: 'Saltar',
+    start: 'Empezar a Aprender',
+  },
   // Common
   common: {
     loading: 'Cargando...',

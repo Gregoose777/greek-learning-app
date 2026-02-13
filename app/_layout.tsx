@@ -13,10 +13,10 @@ function RootNavigator() {
   useEffect(() => {
     if (!isReady) return;
 
-    const onLanguagePicker = segments[0] === 'language-picker';
+    const onOnboarding = segments[0] === 'onboarding';
 
-    if (isFirstLaunch && !onLanguagePicker) {
-      router.replace('/language-picker');
+    if (isFirstLaunch && !onOnboarding) {
+      router.replace('/onboarding');
     }
   }, [isReady, isFirstLaunch, segments, router]);
 
@@ -37,6 +37,7 @@ function RootNavigator() {
           contentStyle: { backgroundColor: colors.background },
         }}
       >
+        <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
         <Stack.Screen name="language-picker" options={{ gestureEnabled: false }} />
         <Stack.Screen name="(tabs)" />
       </Stack>

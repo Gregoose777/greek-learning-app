@@ -302,11 +302,11 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a new user, I want a brief onboarding so I understand how the app works and can set my preferences.
 
 **Acceptance Criteria:**
-- [ ] 3-screen onboarding: Welcome → Pick reference language → Set daily goal → Start
-- [ ] Onboarding only shown on first launch (flag stored locally)
-- [ ] User can skip to defaults at any point
-- [ ] After onboarding, user lands on Home dashboard
-- [ ] Typecheck passes
+- [x] 3-screen onboarding: Welcome → Pick reference language → Set daily goal → Start
+- [x] Onboarding only shown on first launch (flag stored locally)
+- [x] User can skip to defaults at any point
+- [x] After onboarding, user lands on Home dashboard
+- [x] Typecheck passes
 - [ ] Verify changes work on device/simulator
 
 ---

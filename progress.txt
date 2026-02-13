@@ -650,3 +650,33 @@
   - Streak milestone detection: prevStreakRef tracks last known streak; compare against milestone thresholds on focus
   - Platform.OS check before haptics; wrap in try/catch for graceful failure on unsupported devices
 ---
+
+## Iteration 20 - US-020: Onboarding Flow
+- What was implemented:
+  - 3-screen onboarding flow: Welcome → Pick reference language → Set daily goal → Start
+  - Welcome screen: app name, Greek flag emoji, 3 feature highlights with Ionicons
+  - Language picker screen: reuses LANGUAGES array, radio-style selection with checkmark icons
+  - Daily goal screen: trophy icon, 4 goal options (1/2/3/5 lessons/day) as selectable chips
+  - Horizontal FlatList with pagingEnabled for smooth swipe-like navigation (scroll disabled, controlled via buttons)
+  - Step indicator dots at bottom with active dot expanded
+  - Skip button visible on first 2 screens (skips to defaults and goes to Home)
+  - "Start Learning" on final screen creates/updates UserProfile with selected settings
+  - Onboarding only shown on first launch via existing isFirstLaunch flag (AsyncStorage null check)
+  - After onboarding, completeLanguageSetup() clears isFirstLaunch and router.replace to Home
+  - Root layout updated to redirect to /onboarding instead of /language-picker on first launch
+  - i18n strings added for all onboarding UI in EN, ES, FR
+- Files changed:
+  - app/onboarding.tsx (new - 3-step onboarding screen)
+  - app/_layout.tsx (redirect to /onboarding, registered onboarding screen)
+  - src/i18n/locales/en.ts (onboarding i18n keys)
+  - src/i18n/locales/es.ts (onboarding i18n keys)
+  - src/i18n/locales/fr.ts (onboarding i18n keys)
+  - PRD.md (marked US-020 acceptance criteria complete)
+- Learnings for future iterations:
+  - FlatList horizontal + pagingEnabled + scrollEnabled=false for wizard-style controlled navigation
+  - Dimensions.get('window').width for step width; getItemLayout for efficient FlatList scrolling
+  - onViewableItemsChanged for tracking current step in horizontal FlatList
+  - Skip button pattern: apply defaults and call finishOnboarding() to skip remaining steps
+  - Reuse existing LanguageProvider isFirstLaunch flag for onboarding (no new AsyncStorage key needed)
+  - language-picker.tsx still exists for Change Language in Profile; onboarding replaces first-launch usage
+---

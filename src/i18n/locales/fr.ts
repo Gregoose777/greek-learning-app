@@ -183,6 +183,24 @@ export default {
     allCaughtUp: 'Vous êtes à jour. Revenez plus tard pour d\'autres révisions.',
     backToReview: 'Retour aux Révisions',
   },
+  // Onboarding
+  onboarding: {
+    appName: 'HellenicaGo',
+    welcomeTitle: 'Apprenez le Grec Moderne',
+    welcomeSubtitle: 'Maîtrisez le grec de l\'alphabet à la conversation, à votre rythme.',
+    feature1: 'Leçons structurées du débutant au avancé',
+    feature2: 'Quiz amusants et exercices interactifs',
+    feature3: 'Prononciation audio pour chaque mot',
+    languageTitle: 'Choisissez Votre Langue',
+    languageSubtitle: 'Sélectionnez la langue pour les instructions et traductions',
+    goalTitle: 'Définissez Votre Objectif Quotidien',
+    goalSubtitle: 'Combien de leçons voulez-vous compléter chaque jour ?',
+    lessonPerDay: 'leçon par jour',
+    lessonsPerDay: 'leçons par jour',
+    next: 'Suivant',
+    skip: 'Passer',
+    start: 'Commencer à Apprendre',
+  },
   // Common
   common: {
     loading: 'Chargement...',
