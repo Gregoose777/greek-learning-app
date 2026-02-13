@@ -99,6 +99,19 @@ export function updateLessonProgress(data: LessonProgressUpdate): LessonProgress
   return getLessonProgressById(data.id);
 }
 
+/** Get lessons completed today (based on completed_at timestamp). */
+export function getTodayCompletedLessonCount(): number {
+  const db = getDatabase();
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startTimestamp = Math.floor(startOfDay.getTime() / 1000);
+  const row = db.getFirstSync<{ count: number }>(
+    'SELECT COUNT(*) as count FROM lesson_progress WHERE completed = 1 AND completed_at >= ?',
+    [startTimestamp]
+  );
+  return row?.count ?? 0;
+}
+
 /** Delete a lesson progress record by ID. */
 export function deleteLessonProgress(id: number): boolean {
   const db = getDatabase();

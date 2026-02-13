@@ -10,6 +10,15 @@ export default {
   home: {
     title: 'Home',
     subtitle: 'Your Greek learning dashboard',
+    continueLesson: 'Continue Learning',
+    allLessonsComplete: 'All lessons complete!',
+    noLessonsYet: 'Start your first lesson!',
+    level: 'Level',
+    totalXp: 'Total XP',
+    reviewDue: 'Reviews Due',
+    dailyGoal: 'Daily Goal',
+    dailyGoalProgress: '{{completed}} of {{goal}} lessons today',
+    dailyGoalComplete: 'Daily goal reached!',
   },
   // Lessons screen
   lessons: {

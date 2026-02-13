@@ -415,3 +415,33 @@
   - useFocusEffect on Home tab is the right place to check/update streak state on app open
   - Flame icon from Ionicons ("flame") + snow icon ("snow") for freezes
 ---
+
+## Iteration 13 - US-013: Home Dashboard
+- What was implemented:
+  - Full home dashboard with stats row (Level, Total XP, Reviews Due) in 3 elevated cards
+  - Streak card preserved from US-012 with flame icon, longest streak, and freeze count
+  - Daily goal card with progress bar and dynamic text (goal met vs. progress)
+  - "Continue Learning" button navigates to next uncompleted lesson (primary colored card)
+  - Fallback states: "All lessons complete!" (trophy) when done, "Start your first lesson!" when no progress
+  - Level derived from total XP: Math.floor(totalXp / 100) + 1
+  - Daily goal defaults to 1 lesson/day (from UserProfile.dailyGoal field, configurable in Profile later)
+  - Review due count from getDueReviewCards() (spaced repetition cards)
+  - Today's completed lesson count from new getTodayCompletedLessonCount() DB helper
+  - All data refreshes on screen focus via useFocusEffect
+  - i18n support for all new strings in EN, ES, FR
+- Files changed:
+  - app/(tabs)/home/index.tsx (rewritten - full dashboard with stats, streak, goal, continue)
+  - src/database/lessonProgress.ts (added getTodayCompletedLessonCount helper)
+  - src/database/index.ts (exported new helper)
+  - src/i18n/locales/en.ts (home dashboard i18n keys)
+  - src/i18n/locales/es.ts (home dashboard i18n keys)
+  - src/i18n/locales/fr.ts (home dashboard i18n keys)
+  - PRD.md (marked US-013 complete)
+- Learnings for future iterations:
+  - getTodayCompletedLessonCount: SQL COUNT with completed_at >= start-of-day timestamp
+  - getNextLesson: iterate allLessonsFlat(), find first where progressMap has no completed entry
+  - Stats row pattern: 3 flex:1 Cards in a row with gap for even spacing
+  - Card backgroundColor override works because style prop is applied last in the Card component
+  - ScrollView with contentContainerStyle for scrollable dashboard; paddingBottom for safe area
+  - Daily goal stored in UserProfile.dailyGoal (default 1); Profile settings screen will make it configurable
+---

@@ -10,6 +10,15 @@ export default {
   home: {
     title: 'Accueil',
     subtitle: 'Votre tableau de bord d\'apprentissage du grec',
+    continueLesson: 'Continuer à Apprendre',
+    allLessonsComplete: 'Toutes les leçons terminées !',
+    noLessonsYet: 'Commencez votre première leçon !',
+    level: 'Niveau',
+    totalXp: 'XP Total',
+    reviewDue: 'Révisions à Faire',
+    dailyGoal: 'Objectif Quotidien',
+    dailyGoalProgress: '{{completed}} sur {{goal}} leçons aujourd\'hui',
+    dailyGoalComplete: 'Objectif quotidien atteint !',
   },
   // Lessons screen
   lessons: {

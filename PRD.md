@@ -198,13 +198,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want a home screen that shows my progress at a glance so I know where I stand.
 
 **Acceptance Criteria:**
-- [ ] Home tab displays: current streak, total XP, current level, daily goal progress
-- [ ] "Continue" button resumes the next uncompleted lesson
-- [ ] Shows today's review count (cards due for spaced repetition)
-- [ ] Level derived from total XP (e.g., every 100 XP = 1 level)
-- [ ] Daily goal: complete N lessons/day (default 1, configurable in Profile)
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Home tab displays: current streak, total XP, current level, daily goal progress
+- [x] "Continue" button resumes the next uncompleted lesson
+- [x] Shows today's review count (cards due for spaced repetition)
+- [x] Level derived from total XP (e.g., every 100 XP = 1 level)
+- [x] Daily goal: complete N lessons/day (default 1, configurable in Profile)
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

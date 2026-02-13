@@ -10,6 +10,15 @@ export default {
   home: {
     title: 'Inicio',
     subtitle: 'Tu panel de aprendizaje de griego',
+    continueLesson: 'Continuar Aprendiendo',
+    allLessonsComplete: '¡Todas las lecciones completadas!',
+    noLessonsYet: '¡Empieza tu primera lección!',
+    level: 'Nivel',
+    totalXp: 'XP Total',
+    reviewDue: 'Repasos Pendientes',
+    dailyGoal: 'Meta Diaria',
+    dailyGoalProgress: '{{completed}} de {{goal}} lecciones hoy',
+    dailyGoalComplete: '¡Meta diaria alcanzada!',
   },
   // Lessons screen
   lessons: {

@@ -36,6 +36,7 @@ export {
   getLessonProgressByLessonId,
   getAllLessonProgress,
   getCompletedLessons,
+  getTodayCompletedLessonCount,
   updateLessonProgress,
   deleteLessonProgress,
 } from './lessonProgress';
