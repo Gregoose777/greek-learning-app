@@ -2,6 +2,12 @@
 
 ## Learnings
 (Patterns discovered during implementation)
+- i18n: i18next + react-i18next for translations, AsyncStorage for language persistence
+- Translation files live in src/i18n/locales/{en,es,fr}.ts; config in src/i18n/index.ts
+- LanguageProvider wraps entire app in root layout; useLanguage() hook for context
+- First-launch detection: check AsyncStorage for stored language; null = first launch
+- Pattern: useTranslation() + t('key.path') in every screen for translated strings
+- Language change: update i18n + AsyncStorage + UserProfile.referenceLanguage in DB
 - Expo SDK 54 uses expo-router v6 with file-based routing
 - Entry point for expo-router is "expo-router/entry" in package.json main field
 - @expo/vector-icons must be installed separately with --legacy-peer-deps due to react-dom peer dep conflict
@@ -106,4 +112,39 @@
   - Update helpers use dynamic field building pattern to only SET provided fields
   - UserProfile and DailyStreak are singletons (one row); use getUserProfile()/getDailyStreak() without ID
   - Parameterized queries prevent SQL injection; execSync does NOT support params (only for DDL/PRAGMA)
+---
+
+## Iteration 4 - US-004: Reference Language Selection (EN / ES / FR)
+- What was implemented:
+  - i18next + react-i18next for internationalization with 3 reference languages (EN, ES, FR)
+  - @react-native-async-storage/async-storage for persisting language selection
+  - Translation files for all UI strings in English, Spanish, French
+  - LanguageProvider context wrapping the entire app (manages init, first-launch, language changes)
+  - Language picker screen shown on first launch (fullscreen with flag icons)
+  - All UI strings across all screens now load from translation files via useTranslation()
+  - Change Language screen accessible from Profile tab
+  - Language selection persisted to both AsyncStorage and UserProfile.referenceLanguage in SQLite
+  - Root layout handles loading state and first-launch redirect
+- Files changed:
+  - package.json (added i18next, react-i18next, @react-native-async-storage/async-storage)
+  - src/i18n/locales/en.ts (English translations)
+  - src/i18n/locales/es.ts (Spanish translations)
+  - src/i18n/locales/fr.ts (French translations)
+  - src/i18n/index.ts (i18n config, init, changeLanguage, AsyncStorage persistence)
+  - src/i18n/LanguageProvider.tsx (React context for language state, first-launch detection)
+  - app/_layout.tsx (LanguageProvider wrapper, loading state, first-launch redirect)
+  - app/language-picker.tsx (first-launch language selection screen)
+  - app/(tabs)/_layout.tsx (translated tab labels)
+  - app/(tabs)/home/_layout.tsx + index.tsx (translated strings)
+  - app/(tabs)/lessons/_layout.tsx + index.tsx (translated strings)
+  - app/(tabs)/review/_layout.tsx + index.tsx (translated strings)
+  - app/(tabs)/profile/_layout.tsx + index.tsx (translated strings, change language button)
+  - app/(tabs)/profile/change-language.tsx (language change screen in Profile stack)
+- Learnings for future iterations:
+  - i18next init is async; LanguageProvider shows loading spinner until ready
+  - useTranslation() returns { t, i18n }; t('key.path') for translation, i18n.language for current lang
+  - Language stored in two places: AsyncStorage (for app-level i18n) and UserProfile DB (for data logic)
+  - First-launch flow uses router.replace('/language-picker') from root layout useEffect
+  - --legacy-peer-deps needed for AsyncStorage install (react-dom peer dep conflict)
+  - expo-router Stack.Screen registered in _layout.tsx even for dynamically navigated routes
 ---

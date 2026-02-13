@@ -62,13 +62,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want to choose my reference language (English, Spanish, or French) so that instructions and translations appear in my native language.
 
 **Acceptance Criteria:**
-- [ ] Language picker screen shown on first launch
-- [ ] i18n system set up (e.g., `i18next` or custom) with translation files for EN, ES, FR
-- [ ] All UI strings (tab labels, buttons, headings) load from translation files
-- [ ] Selected language persisted locally; skips picker on subsequent launches
-- [ ] Language can be changed later from Profile tab
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Language picker screen shown on first launch
+- [x] i18n system set up (e.g., `i18next` or custom) with translation files for EN, ES, FR
+- [x] All UI strings (tab labels, buttons, headings) load from translation files
+- [x] Selected language persisted locally; skips picker on subsequent launches
+- [x] Language can be changed later from Profile tab
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

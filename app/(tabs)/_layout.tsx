@@ -1,8 +1,11 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { colors, typography } from '../../src/theme';
 
 export default function TabLayout() {
+  const { t } = useTranslation();
+
   return (
     <Tabs
       screenOptions={{
@@ -30,7 +33,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Home',
+          title: t('tabs.home'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
@@ -39,7 +42,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="lessons"
         options={{
-          title: 'Lessons',
+          title: t('tabs.lessons'),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="book" size={size} color={color} />
@@ -49,7 +52,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="review"
         options={{
-          title: 'Review',
+          title: t('tabs.review'),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="refresh" size={size} color={color} />
@@ -59,7 +62,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: t('tabs.profile'),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />

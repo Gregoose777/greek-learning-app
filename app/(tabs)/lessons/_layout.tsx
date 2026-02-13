@@ -1,7 +1,10 @@
 import { Stack } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { colors, typography } from '../../../src/theme';
 
 export default function LessonsLayout() {
+  const { t } = useTranslation();
+
   return (
     <Stack
       screenOptions={{
@@ -11,7 +14,7 @@ export default function LessonsLayout() {
         headerTintColor: colors.primary,
       }}
     >
-      <Stack.Screen name="index" options={{ title: 'Lessons' }} />
+      <Stack.Screen name="index" options={{ title: t('lessons.title') }} />
     </Stack>
   );
 }
