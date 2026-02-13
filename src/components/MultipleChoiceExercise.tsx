@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
+import { SpeakerButton } from './SpeakerButton';
 import type { MultipleChoiceExercise as MCExercise, LocalizedString } from '../content/types';
 
 interface MultipleChoiceExerciseProps {
@@ -54,7 +55,10 @@ export function MultipleChoiceExercise({
     <View style={styles.container}>
       <Text style={styles.prompt}>{prompt}</Text>
       {exercise.greekPrompt && (
-        <Text style={styles.greekPrompt}>{exercise.greekPrompt}</Text>
+        <View style={styles.greekPromptRow}>
+          <Text style={styles.greekPrompt}>{exercise.greekPrompt}</Text>
+          <SpeakerButton text={exercise.greekPrompt} size={22} />
+        </View>
       )}
 
       <View style={styles.options}>
@@ -131,10 +135,15 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginBottom: spacing.xs,
   },
+  greekPromptRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.md,
+  },
   greekPrompt: {
     ...typography.heading2,
     color: colors.primary,
-    marginBottom: spacing.md,
   },
   options: {
     gap: spacing.sm,

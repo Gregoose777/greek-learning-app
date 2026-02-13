@@ -12,7 +12,7 @@ import { useFocusEffect, Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../../src/theme';
-import { Card } from '../../../src/components';
+import { Card, SpeakerButton } from '../../../src/components';
 import {
   getLearnedVocabularyItems,
   searchVocabularyItems,
@@ -61,6 +61,7 @@ export default function ReviewScreen() {
     <Pressable onPress={() => setSelectedWord(item)}>
       <Card variant="outlined" style={styles.wordCard}>
         <View style={styles.wordRow}>
+          <SpeakerButton text={item.greek} size={20} />
           <View style={styles.wordInfo}>
             <Text style={styles.greekText}>{item.greek}</Text>
             <Text style={styles.transliteration}>{item.transliteration}</Text>
@@ -170,6 +171,11 @@ export default function ReviewScreen() {
               <Text style={styles.detailGreek}>{selectedWord.greek}</Text>
               <Text style={styles.detailTransliteration}>{selectedWord.transliteration}</Text>
 
+              {/* Speaker button */}
+              <View style={styles.speakerRow}>
+                <SpeakerButton text={selectedWord.greek} size={28} />
+              </View>
+
               {/* Translation */}
               <View style={styles.detailSection}>
                 <Text style={styles.detailLabel}>{t('vocabulary.translation')}</Text>
@@ -194,7 +200,7 @@ export default function ReviewScreen() {
               <View style={styles.detailSection}>
                 <Text style={styles.detailLabel}>{t('vocabulary.pronunciationGuide')}</Text>
                 <View style={styles.pronunciationRow}>
-                  <Ionicons name="volume-medium" size={24} color={colors.primary} />
+                  <SpeakerButton text={selectedWord.greek} size={24} />
                   <Text style={styles.pronunciationText}>/{selectedWord.transliteration}/</Text>
                 </View>
               </View>
@@ -347,6 +353,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: spacing.xs,
     marginBottom: spacing.lg,
+  },
+  speakerRow: {
+    alignItems: 'center',
+    marginBottom: spacing.sm,
   },
   detailSection: {
     marginTop: spacing.md,

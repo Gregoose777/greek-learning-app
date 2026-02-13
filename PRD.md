@@ -244,13 +244,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want to hear Greek words and sentences pronounced so I learn correct pronunciation.
 
 **Acceptance Criteria:**
-- [ ] `expo-speech` integrated for text-to-speech in Greek (`el-GR` locale)
-- [ ] Speaker icon on vocabulary cards, alphabet detail, and exercise prompts
-- [ ] Tapping speaker icon plays pronunciation of the Greek text
-- [ ] Auto-play pronunciation on new vocabulary introduction in lessons
-- [ ] Graceful fallback if TTS not available (icon hidden, no crash)
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] `expo-speech` integrated for text-to-speech in Greek (`el-GR` locale)
+- [x] Speaker icon on vocabulary cards, alphabet detail, and exercise prompts
+- [x] Tapping speaker icon plays pronunciation of the Greek text
+- [x] Auto-play pronunciation on new vocabulary introduction in lessons
+- [x] Graceful fallback if TTS not available (icon hidden, no crash)
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

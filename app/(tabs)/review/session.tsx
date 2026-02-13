@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../../../src/theme';
-import { Card, ProgressBar, Button } from '../../../src/components';
+import { Card, ProgressBar, Button, SpeakerButton } from '../../../src/components';
 import {
   getDueCardsForSession,
   getVocabularyItemById,
@@ -171,6 +171,7 @@ export default function ReviewSessionScreen() {
           {/* Greek word (always shown) */}
           <Text style={styles.greekWord}>{currentCard.vocab.greek}</Text>
           <Text style={styles.transliteration}>{currentCard.vocab.transliteration}</Text>
+          <SpeakerButton text={currentCard.vocab.greek} size={28} style={{ marginTop: spacing.sm }} />
 
           {/* Answer area */}
           {!revealed ? (

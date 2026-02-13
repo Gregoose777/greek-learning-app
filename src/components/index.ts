@@ -7,3 +7,4 @@ export { TranslationExercise } from './TranslationExercise';
 export { FillBlankExercise } from './FillBlankExercise';
 export { LessonSummary } from './LessonSummary';
 export { MatchPairsExercise } from './MatchPairsExercise';
+export { SpeakerButton } from './SpeakerButton';

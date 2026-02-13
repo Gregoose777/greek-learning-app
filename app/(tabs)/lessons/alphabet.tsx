@@ -13,7 +13,8 @@ import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../../src/i18n/LanguageProvider';
 import { colors, typography, spacing, borderRadius } from '../../../src/theme';
-import { Button, Card, ProgressBar, Badge } from '../../../src/components';
+import { Button, Card, ProgressBar, Badge, SpeakerButton } from '../../../src/components';
+import { speakGreek } from '../../../src/utils';
 import { GREEK_ALPHABET, generateQuizOptions } from '../../../src/content';
 import type { GreekLetter } from '../../../src/content';
 
@@ -220,9 +221,9 @@ function LetterDetailModal({
             {letter.nameGreek} ({letter.name})
           </Text>
 
-          {/* Audio placeholder */}
-          <Pressable style={styles.audioButton}>
-            <Ionicons name="volume-medium-outline" size={24} color={colors.primary} />
+          {/* Audio pronunciation */}
+          <Pressable style={styles.audioButton} onPress={() => speakGreek(letter.nameGreek)}>
+            <Ionicons name="volume-medium" size={24} color={colors.primary} />
             <Text style={[typography.body, { color: colors.primary, marginLeft: spacing.sm }]}>
               {t('alphabet.tapToHear')}
             </Text>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
+import { SpeakerButton } from './SpeakerButton';
 import type { TranslationExercise as TranslationEx, LocalizedString } from '../content/types';
 
 interface TranslationExerciseProps {
@@ -61,7 +62,10 @@ export function TranslationExercise({
     <View style={styles.container}>
       <Text style={styles.prompt}>{prompt}</Text>
       {exercise.greekText && (
-        <Text style={styles.greekText}>{exercise.greekText}</Text>
+        <View style={styles.greekTextRow}>
+          <Text style={styles.greekText}>{exercise.greekText}</Text>
+          <SpeakerButton text={exercise.greekText} size={22} />
+        </View>
       )}
 
       <View style={styles.inputContainer}>
@@ -151,10 +155,15 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginBottom: spacing.xs,
   },
+  greekTextRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.md,
+  },
   greekText: {
     ...typography.heading2,
     color: colors.primary,
-    marginBottom: spacing.md,
   },
   inputContainer: {
     marginTop: spacing.md,

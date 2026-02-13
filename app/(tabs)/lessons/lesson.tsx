@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +6,7 @@ import { colors, typography, spacing, borderRadius } from '../../../src/theme';
 import { ProgressBar, MultipleChoiceExercise, TranslationExercise, FillBlankExercise, MatchPairsExercise, LessonSummary } from '../../../src/components';
 import { getLessonById } from '../../../src/content';
 import type { Exercise, LocalizedString } from '../../../src/content/types';
+import { speakGreek, stopSpeech } from '../../../src/utils';
 import {
   getLessonProgressByLessonId,
   createLessonProgress,
@@ -36,6 +37,17 @@ export default function LessonScreen() {
   const exercises = lesson?.exercises ?? [];
   const totalExercises = exercises.length;
   const currentExercise: Exercise | undefined = exercises[currentIndex];
+
+  // Auto-play Greek pronunciation when a new exercise appears
+  useEffect(() => {
+    if (!currentExercise || showSummary) return;
+    const greekText = getExerciseGreekText(currentExercise);
+    if (greekText) {
+      // Small delay to let the exercise render first
+      const timer = setTimeout(() => speakGreek(greekText), 400);
+      return () => clearTimeout(timer);
+    }
+  }, [exerciseKey, showSummary]);
 
   const saveLessonCompletion = useCallback((finalCorrect: number, lessonId: string) => {
     const accuracy = totalExercises > 0 ? finalCorrect / totalExercises : 0;
@@ -116,6 +128,7 @@ export default function LessonScreen() {
   }, [currentIndex, correctCount, totalExercises, id, saveLessonCompletion]);
 
   const handleContinue = useCallback(() => {
+    stopSpeech();
     router.back();
   }, [router]);
 
@@ -275,6 +288,20 @@ function SkipExercise({
       </Pressable>
     </View>
   );
+}
+
+/** Extract Greek text from an exercise for auto-play TTS */
+function getExerciseGreekText(exercise: Exercise): string | null {
+  if ('greekPrompt' in exercise && exercise.greekPrompt) {
+    return exercise.greekPrompt as string;
+  }
+  if ('greekText' in exercise && exercise.greekText) {
+    return exercise.greekText as string;
+  }
+  if ('greekSentence' in exercise && exercise.greekSentence) {
+    return exercise.greekSentence as string;
+  }
+  return null;
 }
 
 const styles = StyleSheet.create({

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, type ViewStyle, type TextStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
+import { SpeakerButton } from './SpeakerButton';
 import type { FillBlankExercise as FillBlankEx, LocalizedString } from '../content/types';
 
 interface FillBlankExerciseProps {
@@ -71,7 +72,10 @@ export function FillBlankExercise({
       <Text style={styles.prompt}>{sentence}</Text>
 
       {exercise.greekSentence && (
-        <Text style={styles.greekSentence}>{exercise.greekSentence}</Text>
+        <View style={styles.greekSentenceRow}>
+          <Text style={styles.greekSentence}>{exercise.greekSentence}</Text>
+          <SpeakerButton text={exercise.greekSentence} size={22} />
+        </View>
       )}
 
       {hasWordBank ? (
@@ -194,10 +198,15 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginBottom: spacing.xs,
   },
+  greekSentenceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.md,
+  },
   greekSentence: {
     ...typography.heading2,
     color: colors.primary,
-    marginBottom: spacing.md,
   },
   wordBankContainer: {
     marginTop: spacing.md,

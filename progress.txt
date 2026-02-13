@@ -46,6 +46,11 @@
 - DailyStreak is singleton; ISO date strings (YYYY-MM-DD) for day comparison
 - Freeze banking: 1 freeze per 7-day milestone; freeze covers exactly 1 missed day (gap === 2)
 - useFocusEffect on Home screen checks/resets broken streaks on app open
+- TTS: expo-speech with Speech.speak(text, { language: 'el-GR', rate: 0.85 })
+- TTS utility: src/utils/speech.ts; SpeakerButton component in src/components/
+- SpeakerButton graceful fallback: checks isTtsAvailable(), returns null if unavailable
+- Auto-play: useEffect on exerciseKey triggers speakGreek() with 400ms delay
+- Greek text fields: greekPrompt (MC), greekText (translation), greekSentence (fill_blank)
 
 ---
 
@@ -475,4 +480,73 @@
   - Modal with presentationStyle="pageSheet" reused from alphabet pattern for word detail
   - useFocusEffect reloads vocabulary when Review tab gains focus
   - FlatList keyExtractor needs string return (item.id.toString())
+---
+
+## Iteration 15 - US-015: Spaced Repetition Review System
+- What was implemented:
+  - SM-2 algorithm in src/database/srsLogic.ts with quality mapping (Again=0, Hard=2, Good=4, Easy=5)
+  - processReview() updates easiness factor, interval, repetitions, and next review date per SM-2 formula
+  - ensureReviewCardsExist() creates review cards for all learned vocabulary that don't have one
+  - Review cards auto-created on lesson completion (ensureReviewCardsExist called after markVocabularyLearnedByLesson)
+  - Review session screen (app/(tabs)/review/session.tsx): show Greek word, tap to reveal answer, self-rate
+  - 4 rating buttons: Again (red), Hard (orange), Good (green), Easy (blue)
+  - Session summary showing count of each rating
+  - Due cards banner on Review tab: shows count of due cards with link to start session
+  - Empty state when no cards due ("All caught up!")
+  - i18n strings for all SRS UI in EN, ES, FR
+- Files changed:
+  - src/database/srsLogic.ts (new - SM-2 algorithm + helpers)
+  - src/database/index.ts (exported SRS logic)
+  - app/(tabs)/lessons/lesson.tsx (added ensureReviewCardsExist call)
+  - app/(tabs)/review/session.tsx (new - review session screen)
+  - app/(tabs)/review/index.tsx (added due count banner)
+  - app/(tabs)/review/_layout.tsx (registered session screen)
+  - src/i18n/locales/en.ts (srs i18n keys)
+  - src/i18n/locales/es.ts (srs i18n keys)
+  - src/i18n/locales/fr.ts (srs i18n keys)
+  - PRD.md (marked US-015 complete)
+- Learnings for future iterations:
+  - SM-2 quality mapping: Again=0, Hard=2, Good=4, Easy=5; quality < 3 resets interval to 1
+  - EF formula: EF + (0.1 - (5-q) * (0.08 + (5-q) * 0.02)), minimum 1.3
+  - Interval progression: 1 day → 6 days → round(interval * EF)
+  - Review cards created with nextReviewDate = now (due immediately when first learned)
+  - ensureReviewCardsExist() is idempotent; checks getReviewCardByVocabularyId before creating
+  - SRS rating type exported from srsLogic.ts; used in session screen and database barrel
+  - Bash paths with parentheses need quoting on Windows: "app/(tabs)/review/session.tsx"
+  - dist-test/ should be in .gitignore to avoid accidental commits of build artifacts
+---
+
+## Iteration 16 - US-016: Audio Pronunciation (Text-to-Speech)
+- What was implemented:
+  - expo-speech integrated for TTS with Greek locale (el-GR)
+  - TTS utility module (src/utils/speech.ts) with speakGreek(), stopSpeech(), isTtsAvailable(), isSpeaking()
+  - Reusable SpeakerButton component (src/components/SpeakerButton.tsx) with graceful fallback (hidden when TTS unavailable)
+  - Speaker icons on vocabulary word cards in Review tab (each word card + detail modal)
+  - Speaker icon on SRS review session flashcards
+  - Functional audio button in alphabet letter detail modal (replaced placeholder)
+  - Speaker icons next to Greek text in exercise prompts (MultipleChoiceExercise, TranslationExercise, FillBlankExercise)
+  - Auto-play pronunciation when new exercises with Greek text appear in lessons (useEffect + 400ms delay)
+  - Stop speech on lesson exit (handleContinue)
+- Files changed:
+  - package.json (added expo-speech dependency)
+  - src/utils/speech.ts (new - TTS utility module)
+  - src/utils/index.ts (new - barrel export)
+  - src/components/SpeakerButton.tsx (new - reusable speaker icon button)
+  - src/components/index.ts (added SpeakerButton export)
+  - src/components/MultipleChoiceExercise.tsx (added SpeakerButton next to greekPrompt)
+  - src/components/TranslationExercise.tsx (added SpeakerButton next to greekText)
+  - src/components/FillBlankExercise.tsx (added SpeakerButton next to greekSentence)
+  - app/(tabs)/review/index.tsx (added SpeakerButton to word cards + detail modal)
+  - app/(tabs)/review/session.tsx (added SpeakerButton to review flashcards)
+  - app/(tabs)/lessons/alphabet.tsx (made audio button functional with speakGreek)
+  - app/(tabs)/lessons/lesson.tsx (added auto-play useEffect + getExerciseGreekText helper + stopSpeech on exit)
+  - PRD.md (marked US-016 complete)
+- Learnings for future iterations:
+  - expo-speech: Speech.speak(text, { language: 'el-GR', rate: 0.85 }) for Greek TTS
+  - SpeakerButton checks isTtsAvailable() on mount; returns null if unavailable (graceful fallback)
+  - Speech.stop() before Speech.speak() prevents overlap when tapping rapidly
+  - Auto-play with setTimeout(400ms) gives exercise time to render before speaking
+  - src/utils/ is the canonical location for utility modules (speech, etc.)
+  - Wrap all Speech calls in try/catch for graceful failure
+  - Greek text fields vary by exercise type: greekPrompt (MC), greekText (translation), greekSentence (fill_blank)
 ---
