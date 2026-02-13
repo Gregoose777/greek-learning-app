@@ -8,15 +8,24 @@ interface LessonSummaryProps {
   correctCount: number;
   totalCount: number;
   xpEarned: number;
+  timeSpentSeconds: number;
   onContinue: () => void;
   onRetry: () => void;
   t: (key: string, opts?: Record<string, unknown>) => string;
+}
+
+function formatTime(seconds: number): string {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  if (mins === 0) return `${secs}s`;
+  return `${mins}m ${secs}s`;
 }
 
 export function LessonSummary({
   correctCount,
   totalCount,
   xpEarned,
+  timeSpentSeconds,
   onContinue,
   onRetry,
   t,
@@ -40,6 +49,12 @@ export function LessonSummary({
             <Ionicons name="checkmark-done-circle" size={28} color={colors.success} />
             <Text style={styles.statValue}>{accuracy}%</Text>
             <Text style={styles.statLabel}>{t('lessonSummary.score')}</Text>
+          </View>
+          <View style={styles.divider} />
+          <View style={styles.stat}>
+            <Ionicons name="time" size={28} color={colors.primary} />
+            <Text style={styles.statValue}>{formatTime(timeSpentSeconds)}</Text>
+            <Text style={styles.statLabel}>{t('lessonSummary.timeSpent')}</Text>
           </View>
         </View>
         <Text style={styles.detail}>
@@ -99,7 +114,7 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
   },
   statValue: {
-    ...typography.heading1,
+    ...typography.heading2,
     color: colors.text,
   },
   statLabel: {

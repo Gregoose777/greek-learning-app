@@ -322,3 +322,59 @@
   - Exercise components follow same structure: prompt, input area, feedback banner, check/continue button
   - Seed data already has translation and fill_blank exercises in Lesson 3-5; no new seed data needed
 ---
+
+## Iteration 10 - US-010: Lesson Exercise Engine — Match Pairs
+- What was implemented:
+  - MatchPairsExercise component: two columns (Greek left, translations right) with shuffled order
+  - Tap-to-select from each column; matching pair index = correct match
+  - Correct pairs highlight green with checkmark and lock (opacity 0.7, disabled)
+  - Incorrect pairs flash red with shake animation (Animated.Value translateX) and reset after 600ms
+  - Exercise auto-completes when all pairs matched; shows success feedback
+  - "Perfect match" message when no mistakes; "All matched" when mistakes > 0
+  - onAnswer(true) only when zero mistakes; otherwise onAnswer(false)
+  - Fisher-Yates shuffle for both columns (useMemo for stability)
+  - Integrated into lesson engine renderExercise() switch with match_pairs case
+  - i18n strings: matchPairs, greek, translation, perfectMatch, allMatched in EN/ES/FR
+- Files changed:
+  - src/components/MatchPairsExercise.tsx (new - match pairs exercise component)
+  - src/components/index.ts (added MatchPairsExercise export)
+  - app/(tabs)/lessons/lesson.tsx (added match_pairs case + import)
+  - src/i18n/locales/en.ts (match pairs i18n keys)
+  - src/i18n/locales/es.ts (match pairs i18n keys)
+  - src/i18n/locales/fr.ts (match pairs i18n keys)
+  - PRD.md (marked US-010 complete)
+- Learnings for future iterations:
+  - Match pairs uses pair index as the key for matching: greek[i] matches translation[i]
+  - Shuffled display order via useMemo + Fisher-Yates; original pair indices used for match logic
+  - Animated.Value with translateX for shake effect on incorrect matches
+  - setTimeout(600ms) for incorrect flash duration before resetting selection
+  - Seed data already has match_pairs exercises in all 5 lessons of Unit 1; no new seed data needed
+  - Match pairs differs from other exercises: no check/continue button flow; auto-advances on completion
+---
+
+## Iteration 11 - US-011: XP System & Lesson Completion
+- What was implemented:
+  - XP calculation: base 10 XP + accuracy bonus (up to 5 XP for 100%) = max 15 XP per lesson
+  - LessonProgress record created/updated on lesson completion with score, XP, timeSpent, completedAt, attempts
+  - UserProfile.totalXp updated with XP earned; currentLevel derived from totalXp (every 100 XP = 1 level)
+  - Smart XP handling: re-completing a lesson only adds XP diff if new score is higher (prevents XP farming)
+  - Time tracking: useRef(Date.now()) at lesson start, delta calculated on completion
+  - Lesson summary now shows 3 stats: XP earned, accuracy %, time spent (formatted as Xm Ys)
+  - Timer resets on retry
+  - i18n: timeSpent key added to EN/ES/FR translation files
+  - Completing a lesson creates LessonProgress record which unlocks the next lesson (existing unlock logic in lessons/index.tsx checks progressMap)
+- Files changed:
+  - app/(tabs)/lessons/lesson.tsx (DB imports, startTimeRef, saveLessonCompletion, savedXp/savedTimeSpent state)
+  - src/components/LessonSummary.tsx (added timeSpentSeconds prop, formatTime helper, time stat column, heading2 for stat values)
+  - src/i18n/locales/en.ts (lessonSummary.timeSpent)
+  - src/i18n/locales/es.ts (lessonSummary.timeSpent)
+  - src/i18n/locales/fr.ts (lessonSummary.timeSpent)
+  - PRD.md (marked US-011 complete)
+- Learnings for future iterations:
+  - saveLessonCompletion pattern: check existing → create or update → update profile XP
+  - XP diff pattern prevents inflation: xpToAdd = max(0, newXP - existingXP)
+  - Level formula: Math.floor(totalXp / 100) + 1 (level 1 at 0 XP, level 2 at 100 XP, etc.)
+  - useRef for timers avoids re-render; Date.now() for start, delta on completion
+  - LessonProgress.completed = true is what getLessonStatus() checks to unlock next lesson
+  - With 3 stat columns, heading2 (fontSize 22) fits better than heading1 (fontSize 28)
+---

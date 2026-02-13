@@ -168,13 +168,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want to earn XP for completing lessons so I feel a sense of progression.
 
 **Acceptance Criteria:**
-- [ ] XP awarded per lesson: base 10 XP + bonus for accuracy (up to 5 XP for 100%)
-- [ ] XP total stored in local user profile
-- [ ] Lesson completion updates `LessonProgress` record (completed, score, XP, timestamp)
-- [ ] Lesson summary screen shows: XP earned, accuracy %, time spent
-- [ ] Completing a lesson unlocks the next one in the unit
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] XP awarded per lesson: base 10 XP + bonus for accuracy (up to 5 XP for 100%)
+- [x] XP total stored in local user profile
+- [x] Lesson completion updates `LessonProgress` record (completed, score, XP, timestamp)
+- [x] Lesson summary screen shows: XP earned, accuracy %, time spent
+- [x] Completing a lesson unlocks the next one in the unit
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

@@ -106,6 +106,7 @@ export default {
     accuracy: '{{percent}}% de Precisión',
     xpEarned: 'XP Ganados',
     questionsCorrect: '{{correct}} de {{total}} correctas',
+    timeSpent: 'Tiempo',
     continueLearning: 'Continuar',
     retryLesson: 'Intentar de Nuevo',
   },
