@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
+import { useState, useRef } from 'react';
+import { StyleSheet, Text, View, TextInput, Pressable, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
 import { SpeakerButton } from './SpeakerButton';
+import { triggerSuccessHaptic, triggerErrorHaptic, createPulseAnimation, createShakeAnimation } from '../utils';
 import type { TranslationExercise as TranslationEx, LocalizedString } from '../content/types';
 
 interface TranslationExerciseProps {
@@ -43,6 +44,9 @@ export function TranslationExercise({
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
+  const feedbackScale = useRef(new Animated.Value(1)).current;
+  const feedbackTranslateX = useRef(new Animated.Value(0)).current;
+
   const prompt =
     (exercise.prompt as LocalizedString)[lang as keyof LocalizedString] ??
     exercise.prompt.en;
@@ -52,6 +56,13 @@ export function TranslationExercise({
     const correct = checkAnswer(userInput, exercise.acceptedAnswers);
     setIsCorrect(correct);
     setAnswered(true);
+    if (correct) {
+      triggerSuccessHaptic();
+      createPulseAnimation(feedbackScale).start();
+    } else {
+      triggerErrorHaptic();
+      createShakeAnimation(feedbackTranslateX).start();
+    }
   };
 
   const handleContinue = () => {
@@ -88,10 +99,16 @@ export function TranslationExercise({
       </View>
 
       {answered && (
-        <View
+        <Animated.View
           style={[
             styles.feedback,
             isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect,
+            {
+              transform: [
+                { scale: feedbackScale },
+                { translateX: feedbackTranslateX },
+              ],
+            },
           ]}
         >
           <Ionicons
@@ -114,7 +131,7 @@ export function TranslationExercise({
               })}
             </Text>
           )}
-        </View>
+        </Animated.View>
       )}
 
       <View style={styles.buttonContainer}>

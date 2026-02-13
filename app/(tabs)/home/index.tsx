@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native';
 import { useFocusEffect, Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing } from '../../../src/theme';
-import { Card, ProgressBar } from '../../../src/components';
+import { Card, ProgressBar, StreakCelebration } from '../../../src/components';
 import {
   checkStreakOnAppOpen,
   getUserProfile,
@@ -15,6 +15,8 @@ import {
 import type { DailyStreak, UserProfile, LessonProgress } from '../../../src/database';
 import { getAllLessonsFlat } from '../../../src/content';
 import type { Lesson } from '../../../src/content';
+
+const STREAK_MILESTONES = [7, 30, 100];
 
 function getNextLesson(
   allLessons: Lesson[],
@@ -35,11 +37,25 @@ export default function HomeScreen() {
   const [allComplete, setAllComplete] = useState(false);
   const [reviewDueCount, setReviewDueCount] = useState(0);
   const [todayLessons, setTodayLessons] = useState(0);
+  const [celebrationStreak, setCelebrationStreak] = useState<number | null>(null);
+  const prevStreakRef = useRef<number>(0);
 
   useFocusEffect(
     useCallback(() => {
       const s = checkStreakOnAppOpen();
       setStreak(s);
+
+      // Check for streak milestone celebration
+      const prevStreak = prevStreakRef.current;
+      if (s.currentStreak > prevStreak) {
+        for (const milestone of STREAK_MILESTONES) {
+          if (s.currentStreak >= milestone && prevStreak < milestone) {
+            setCelebrationStreak(milestone);
+            break;
+          }
+        }
+      }
+      prevStreakRef.current = s.currentStreak;
 
       const p = getUserProfile();
       setProfile(p);
@@ -69,6 +85,14 @@ export default function HomeScreen() {
   const goalMet = todayLessons >= dailyGoal;
 
   return (
+    <View style={styles.wrapper}>
+      {celebrationStreak !== null && (
+        <StreakCelebration
+          streakCount={celebrationStreak}
+          onDismiss={() => setCelebrationStreak(null)}
+          t={t}
+        />
+      )}
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Text style={[typography.heading2, { color: colors.text }]}>{t('home.title')}</Text>
       <Text style={[typography.body, { color: colors.textSecondary, marginTop: spacing.xs }]}>
@@ -198,10 +222,14 @@ export default function HomeScreen() {
         </Link>
       )}
     </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background,

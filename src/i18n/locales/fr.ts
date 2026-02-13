@@ -146,6 +146,8 @@ export default {
     longest: 'Record',
     freezes: 'Protections',
     freezeHint: 'La protection de série couvre 1 jour manqué',
+    milestoneTitle: 'Série de {{count}} jours !',
+    milestoneSubtitle: 'Quelle persévérance ! Continuez !',
   },
   // Vocabulary collection
   vocabulary: {

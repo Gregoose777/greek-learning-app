@@ -55,6 +55,11 @@
 - Profile stats: useFocusEffect to reload getUserProfile, getOrCreateStreak, getCompletedLessons on focus
 - Daily goal chips: [1,2,3,5] options with active/inactive chip styles (borderRadius.full)
 - Alert.alert with destructive style for reset confirmation
+- Haptics: expo-haptics with Platform.OS check; triggerSuccessHaptic/triggerErrorHaptic in src/utils/haptics.ts
+- Animations: src/utils/animations.ts with createPulseAnimation, createShakeAnimation, createCountUpAnimation
+- Exercise feedback animations: Animated.View wrapping feedback banner with scale + translateX transforms
+- XP count-up: Animated.Value listener drives useState for display; useNativeDriver: false required
+- Streak celebration: StreakCelebration component with confetti particles + spring card; auto-dismiss 3s
 
 ---
 
@@ -603,4 +608,45 @@
   - Seed loader is idempotent for vocabulary (checks existing by greek + lesson_id before insert)
   - Each lesson should have 4-5 exercises of varied types for good learning coverage
   - Modern Greek vocabulary: use common colloquial forms (εφτά not επτά, οχτώ not οκτώ)
+---
+
+## Iteration 19 - US-019: Animations & Haptic Feedback
+- What was implemented:
+  - expo-haptics installed for haptic feedback on correct/incorrect answers and milestones
+  - Haptics utility (src/utils/haptics.ts): triggerSuccessHaptic, triggerErrorHaptic, triggerSelectionHaptic, triggerHeavyHaptic with Platform check + try/catch fallback
+  - Animations utility (src/utils/animations.ts): createPulseAnimation (scale), createShakeAnimation (translateX), createCountUpAnimation (value interpolation)
+  - MultipleChoiceExercise: green pulse animation + success haptic on correct; shake animation + error haptic on incorrect
+  - TranslationExercise: same pulse/shake + haptic feedback on correct/incorrect
+  - FillBlankExercise: same pulse/shake + haptic feedback on correct/incorrect
+  - MatchPairsExercise: added success/error haptic to existing match/mismatch logic
+  - LessonSummary: XP count-up animation (0 to earned XP over 800ms), trophy entrance spring animation, success haptic on mount
+  - StreakCelebration component (src/components/StreakCelebration.tsx): confetti particle animation + milestone card with spring entrance for streak milestones (7, 30, 100 days)
+  - Home screen: detects streak milestone crossings via prevStreakRef; shows StreakCelebration overlay with auto-dismiss after 3s
+  - i18n strings for streak milestones in EN, ES, FR
+- Files changed:
+  - package.json (added expo-haptics)
+  - src/utils/haptics.ts (new - haptic feedback utilities)
+  - src/utils/animations.ts (new - animation factory functions)
+  - src/utils/index.ts (barrel exports for haptics + animations)
+  - src/components/MultipleChoiceExercise.tsx (pulse/shake animations + haptics)
+  - src/components/TranslationExercise.tsx (pulse/shake animations + haptics)
+  - src/components/FillBlankExercise.tsx (pulse/shake animations + haptics)
+  - src/components/MatchPairsExercise.tsx (haptic feedback on match/mismatch)
+  - src/components/LessonSummary.tsx (XP count-up animation + trophy spring)
+  - src/components/StreakCelebration.tsx (new - confetti celebration overlay)
+  - src/components/index.ts (added StreakCelebration export)
+  - app/(tabs)/home/index.tsx (streak milestone detection + celebration overlay)
+  - src/i18n/locales/en.ts (milestoneTitle, milestoneSubtitle)
+  - src/i18n/locales/es.ts (milestoneTitle, milestoneSubtitle)
+  - src/i18n/locales/fr.ts (milestoneTitle, milestoneSubtitle)
+  - PRD.md (marked US-019 complete)
+- Learnings for future iterations:
+  - expo-haptics needs --legacy-peer-deps to install (same react-dom peer conflict)
+  - Built-in Animated API is sufficient for pulse, shake, count-up, spring animations (no need for reanimated)
+  - useNativeDriver: true for transforms (scale, translateX); false for text value animations
+  - Animated.Value listeners with addListener/removeListener for driving state-based text displays
+  - Animated.spring with friction/tension for bouncy entrance effects (trophy, celebration card)
+  - Confetti: array of Animated.Value particles with staggered start, random spread, and fade-out
+  - Streak milestone detection: prevStreakRef tracks last known streak; compare against milestone thresholds on focus
+  - Platform.OS check before haptics; wrap in try/catch for graceful failure on unsupported devices
 ---

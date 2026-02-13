@@ -287,13 +287,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want subtle animations and haptic feedback so the app feels polished and responsive.
 
 **Acceptance Criteria:**
-- [ ] Correct answer: green pulse animation + success haptic
-- [ ] Wrong answer: shake animation + error haptic
-- [ ] XP earned: count-up animation on summary screen
-- [ ] Streak milestone (7, 30, 100 days): celebration animation (confetti or similar)
-- [ ] Animations use `react-native-reanimated` or Expo's built-in Animated API
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Correct answer: green pulse animation + success haptic
+- [x] Wrong answer: shake animation + error haptic
+- [x] XP earned: count-up animation on summary screen
+- [x] Streak milestone (7, 30, 100 days): celebration animation (confetti or similar)
+- [x] Animations use `react-native-reanimated` or Expo's built-in Animated API
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

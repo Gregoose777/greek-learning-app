@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { StyleSheet, Text, View, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
 import { Button } from './Button';
 import { Card } from './Card';
+import { createCountUpAnimation, triggerSuccessHaptic } from '../utils';
 
 interface LessonSummaryProps {
   correctCount: number;
@@ -32,16 +34,42 @@ export function LessonSummary({
 }: LessonSummaryProps) {
   const accuracy = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
 
+  // XP count-up animation
+  const xpAnim = useRef(new Animated.Value(0)).current;
+  const [displayXp, setDisplayXp] = useState(0);
+
+  useEffect(() => {
+    triggerSuccessHaptic();
+    const listener = xpAnim.addListener(({ value }) => {
+      setDisplayXp(Math.round(value));
+    });
+    createCountUpAnimation(xpAnim, xpEarned, 800).start();
+    return () => xpAnim.removeListener(listener);
+  }, [xpEarned]);
+
+  // Trophy scale entrance animation
+  const trophyScale = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.spring(trophyScale, {
+      toValue: 1,
+      friction: 4,
+      tension: 60,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Ionicons name="trophy" size={64} color={colors.secondary} style={styles.icon} />
+      <Animated.View style={{ transform: [{ scale: trophyScale }] }}>
+        <Ionicons name="trophy" size={64} color={colors.secondary} style={styles.icon} />
+      </Animated.View>
       <Text style={styles.title}>{t('lessonSummary.title')}</Text>
 
       <Card variant="elevated" style={styles.card}>
         <View style={styles.statRow}>
           <View style={styles.stat}>
             <Ionicons name="star" size={28} color={colors.secondary} />
-            <Text style={styles.statValue}>{xpEarned}</Text>
+            <Text style={styles.statValue}>{displayXp}</Text>
             <Text style={styles.statLabel}>{t('lessonSummary.xpEarned')}</Text>
           </View>
           <View style={styles.divider} />

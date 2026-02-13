@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable, type ViewStyle, type TextStyle } from 'react-native';
+import { useState, useRef } from 'react';
+import { StyleSheet, Text, View, TextInput, Pressable, Animated, type ViewStyle, type TextStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
 import { SpeakerButton } from './SpeakerButton';
+import { triggerSuccessHaptic, triggerErrorHaptic, createPulseAnimation, createShakeAnimation } from '../utils';
 import type { FillBlankExercise as FillBlankEx, LocalizedString } from '../content/types';
 
 interface FillBlankExerciseProps {
@@ -37,6 +38,9 @@ export function FillBlankExercise({
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
+  const feedbackScale = useRef(new Animated.Value(1)).current;
+  const feedbackTranslateX = useRef(new Animated.Value(0)).current;
+
   const hasWordBank = exercise.wordBank && exercise.wordBank.length > 0;
 
   const sentence =
@@ -54,6 +58,13 @@ export function FillBlankExercise({
     const correct = normalize(answer) === normalize(exercise.answer);
     setIsCorrect(correct);
     setAnswered(true);
+    if (correct) {
+      triggerSuccessHaptic();
+      createPulseAnimation(feedbackScale).start();
+    } else {
+      triggerErrorHaptic();
+      createShakeAnimation(feedbackTranslateX).start();
+    }
   };
 
   const handleContinue = () => {
@@ -137,10 +148,16 @@ export function FillBlankExercise({
       )}
 
       {answered && (
-        <View
+        <Animated.View
           style={[
             styles.feedback,
             isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect,
+            {
+              transform: [
+                { scale: feedbackScale },
+                { translateX: feedbackTranslateX },
+              ],
+            },
           ]}
         >
           <Ionicons
@@ -163,7 +180,7 @@ export function FillBlankExercise({
               })}
             </Text>
           )}
-        </View>
+        </Animated.View>
       )}
 
       <View style={styles.buttonContainer}>

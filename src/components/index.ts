@@ -8,3 +8,4 @@ export { FillBlankExercise } from './FillBlankExercise';
 export { LessonSummary } from './LessonSummary';
 export { MatchPairsExercise } from './MatchPairsExercise';
 export { SpeakerButton } from './SpeakerButton';
+export { StreakCelebration } from './StreakCelebration';

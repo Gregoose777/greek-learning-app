@@ -146,6 +146,8 @@ export default {
     longest: 'Longest',
     freezes: 'Freezes',
     freezeHint: 'Streak freeze protects 1 missed day',
+    milestoneTitle: '{{count}} Day Streak!',
+    milestoneSubtitle: 'Amazing dedication! Keep it going!',
   },
   // Vocabulary collection
   vocabulary: {

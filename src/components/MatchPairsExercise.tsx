@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { StyleSheet, Text, View, Pressable, Animated, type ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
+import { triggerSuccessHaptic, triggerErrorHaptic } from '../utils';
 import type { MatchPairsExercise as MatchPairsEx, LocalizedString } from '../content/types';
 
 interface MatchPairsExerciseProps {
@@ -94,10 +95,12 @@ export function MatchPairsExercise({
 
     if (greekIndex === translationIndex) {
       // Correct match!
+      triggerSuccessHaptic();
       setMatchedPairs((prev) => new Set([...prev, greekIndex]));
       setSelection(null);
     } else {
       // Incorrect match - flash red and reset
+      triggerErrorHaptic();
       setMistakes((m) => m + 1);
       setIncorrectFlash({ greek: greekIndex, translation: translationIndex });
       triggerShake();

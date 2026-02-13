@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { useState, useRef } from 'react';
+import { StyleSheet, Text, View, Pressable, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius } from '../theme';
 import { SpeakerButton } from './SpeakerButton';
+import { triggerSuccessHaptic, triggerErrorHaptic, createPulseAnimation, createShakeAnimation } from '../utils';
 import type { MultipleChoiceExercise as MCExercise, LocalizedString } from '../content/types';
 
 interface MultipleChoiceExerciseProps {
@@ -22,11 +23,22 @@ export function MultipleChoiceExercise({
   const [answered, setAnswered] = useState(false);
   const isCorrect = selectedIndex === exercise.correctIndex;
 
+  const feedbackScale = useRef(new Animated.Value(1)).current;
+  const feedbackTranslateX = useRef(new Animated.Value(0)).current;
+
   const prompt = (exercise.prompt as LocalizedString)[lang as keyof LocalizedString] ?? exercise.prompt.en;
 
   const handleCheck = () => {
     if (selectedIndex === null) return;
     setAnswered(true);
+    const correct = selectedIndex === exercise.correctIndex;
+    if (correct) {
+      triggerSuccessHaptic();
+      createPulseAnimation(feedbackScale).start();
+    } else {
+      triggerErrorHaptic();
+      createShakeAnimation(feedbackTranslateX).start();
+    }
   };
 
   const handleContinue = () => {
@@ -86,7 +98,18 @@ export function MultipleChoiceExercise({
       </View>
 
       {answered && (
-        <View style={[styles.feedback, isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect]}>
+        <Animated.View
+          style={[
+            styles.feedback,
+            isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect,
+            {
+              transform: [
+                { scale: feedbackScale },
+                { translateX: feedbackTranslateX },
+              ],
+            },
+          ]}
+        >
           <Ionicons
             name={isCorrect ? 'checkmark-circle' : 'close-circle'}
             size={24}
@@ -102,7 +125,7 @@ export function MultipleChoiceExercise({
               })}
             </Text>
           )}
-        </View>
+        </Animated.View>
       )}
 
       <View style={styles.buttonContainer}>

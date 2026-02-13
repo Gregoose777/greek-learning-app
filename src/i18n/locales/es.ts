@@ -146,6 +146,8 @@ export default {
     longest: 'Más larga',
     freezes: 'Protecciones',
     freezeHint: 'La protección de racha cubre 1 día perdido',
+    milestoneTitle: '¡Racha de {{count}} días!',
+    milestoneSubtitle: '¡Dedicación increíble! ¡Sigue así!',
   },
   // Vocabulary collection
   vocabulary: {
