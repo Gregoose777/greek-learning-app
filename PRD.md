@@ -49,11 +49,11 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a developer, I need a local persistence layer so that user progress, settings, and lesson data are stored on-device.
 
 **Acceptance Criteria:**
-- [ ] SQLite (via `expo-sqlite`) or AsyncStorage set up for local persistence
-- [ ] Data models defined: `UserProfile`, `LessonProgress`, `VocabularyItem`, `ReviewCard`, `DailyStreak`
-- [ ] CRUD helper functions for each model (create, read, update, delete)
-- [ ] Data persists across app restarts (verified manually)
-- [ ] Typecheck passes
+- [x] SQLite (via `expo-sqlite`) or AsyncStorage set up for local persistence
+- [x] Data models defined: `UserProfile`, `LessonProgress`, `VocabularyItem`, `ReviewCard`, `DailyStreak`
+- [x] CRUD helper functions for each model (create, read, update, delete)
+- [x] Data persists across app restarts (verified manually)
+- [x] Typecheck passes
 
 ---
 

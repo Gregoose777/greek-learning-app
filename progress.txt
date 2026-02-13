@@ -13,6 +13,11 @@
 - Import theme: `import { colors, typography, spacing, borderRadius } from '../src/theme'`
 - Import components: `import { Button, Card, ProgressBar, Badge } from '../src/components'`
 - Link component with asChild for navigation buttons: `<Link href="..." asChild><Button .../></Link>`
+- Database layer lives in src/database/; import via `import { ... } from '../src/database'`
+- expo-sqlite v16 uses synchronous API: openDatabaseSync, runSync, getFirstSync, getAllSync, execSync
+- DB schema uses snake_case columns; TypeScript models use camelCase; row-to-model mappers convert between them
+- Singleton DB pattern: getDatabase() lazily initializes and returns cached instance
+- CRUD pattern: typed Row interface → rowToModel mapper → parameterized queries with ? placeholders
 
 ---
 
@@ -72,4 +77,33 @@
   - All screens should import colors/typography/spacing from theme instead of hardcoded values
   - Stack screenOptions pattern for consistent headers: headerStyle, headerTitleStyle, headerShadowVisible, headerTintColor
   - Must read a file before writing to it (Claude tool requirement)
+---
+
+## Iteration 3 - US-003: Local Database & Data Models
+- What was implemented:
+  - expo-sqlite v16.0.10 installed via `npx expo install expo-sqlite`
+  - Database initialization with WAL mode and schema auto-creation (src/database/db.ts)
+  - TypeScript data models for all 5 entities: UserProfile, LessonProgress, VocabularyItem, ReviewCard, DailyStreak (src/database/types.ts)
+  - Insert and Update helper types (Omit-based) for each model
+  - Full CRUD helpers for each model with parameterized queries
+  - Row-to-model mappers converting snake_case DB columns to camelCase TypeScript
+  - Barrel export (src/database/index.ts) for clean imports
+  - SQLite indexes on frequently queried columns (lesson_id, category, next_review_date, vocabulary_id)
+  - Foreign key constraint: review_card.vocabulary_id → vocabulary_item.id with ON DELETE CASCADE
+- Files changed:
+  - package.json (added expo-sqlite dependency)
+  - src/database/types.ts (data model types + insert/update types)
+  - src/database/db.ts (database init, schema creation, getDatabase singleton)
+  - src/database/userProfile.ts (CRUD for UserProfile)
+  - src/database/lessonProgress.ts (CRUD for LessonProgress)
+  - src/database/vocabularyItem.ts (CRUD for VocabularyItem)
+  - src/database/reviewCard.ts (CRUD for ReviewCard)
+  - src/database/dailyStreak.ts (CRUD for DailyStreak)
+  - src/database/index.ts (barrel export)
+- Learnings for future iterations:
+  - expo-sqlite v16 sync API: openDatabaseSync, runSync, getFirstSync, getAllSync, execSync, withTransactionSync
+  - SQLite stores booleans as INTEGER (0/1); mappers convert to/from TypeScript boolean
+  - Update helpers use dynamic field building pattern to only SET provided fields
+  - UserProfile and DailyStreak are singletons (one row); use getUserProfile()/getDailyStreak() without ID
+  - Parameterized queries prevent SQL injection; execSync does NOT support params (only for DDL/PRAGMA)
 ---
