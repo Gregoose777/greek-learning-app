@@ -1,0 +1,36 @@
+# Progress Log
+
+## Learnings
+(Patterns discovered during implementation)
+- Expo SDK 54 uses expo-router v6 with file-based routing
+- Entry point for expo-router is "expo-router/entry" in package.json main field
+- @expo/vector-icons must be installed separately with --legacy-peer-deps due to react-dom peer dep conflict
+- Tab navigation in expo-router uses directory-based tabs: app/(tabs)/tabname/_layout.tsx + index.tsx
+- npx expo install handles version compatibility; npm install --legacy-peer-deps for manual installs
+- Old App.tsx and index.ts files should be removed when migrating to expo-router
+- Test compilation with `npx expo export --platform android` instead of web (web needs react-dom)
+
+---
+
+## Iteration 1 - US-001: Project Scaffolding & Navigation Shell
+- What was implemented:
+  - Expo project with TypeScript, expo-router v6 file-based routing
+  - Bottom tab navigation with 4 tabs: Home, Lessons, Review, Profile
+  - Stack navigator (_layout.tsx) nested in each tab directory
+  - Placeholder screen for each tab with title and subtitle
+- Files changed:
+  - package.json (project setup, dependencies)
+  - app.json (app name, scheme, expo-router plugin)
+  - tsconfig.json (expo base config, strict mode)
+  - app/_layout.tsx (root Stack layout)
+  - app/(tabs)/_layout.tsx (tab navigator with Ionicons)
+  - app/(tabs)/home/_layout.tsx + index.tsx
+  - app/(tabs)/lessons/_layout.tsx + index.tsx
+  - app/(tabs)/review/_layout.tsx + index.tsx
+  - app/(tabs)/profile/_layout.tsx + index.tsx
+- Learnings for future iterations:
+  - create-expo-app won't run in a dir with existing files; use temp dir + copy approach
+  - node_modules copy/move is unreliable; better to just `npm install` fresh
+  - TypeScript check: `npx tsc --noEmit`; compilation test: `npx expo export --platform android`
+  - Ionicons import: `import { Ionicons } from '@expo/vector-icons'`
+---
