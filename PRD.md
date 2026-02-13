@@ -273,12 +273,12 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a developer, I need additional lesson content so the app has enough material beyond the basics.
 
 **Acceptance Criteria:**
-- [ ] Unit 2: "Greetings & Introductions" — at least 5 lessons
-- [ ] Unit 3: "Numbers, Colors & Days" — at least 5 lessons
-- [ ] Unit 4: "Food & Ordering" — at least 5 lessons
-- [ ] All lessons include exercises of varied types (MC, translation, fill-blank, match)
-- [ ] All content translated in EN, ES, FR
-- [ ] Typecheck passes
+- [x] Unit 2: "Greetings & Introductions" — at least 5 lessons
+- [x] Unit 3: "Numbers, Colors & Days" — at least 5 lessons
+- [x] Unit 4: "Food & Ordering" — at least 5 lessons
+- [x] All lessons include exercises of varied types (MC, translation, fill-blank, match)
+- [x] All content translated in EN, ES, FR
+- [x] Typecheck passes
 
 ---
 

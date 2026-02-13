@@ -582,3 +582,25 @@
   - useFocusEffect reloads profile/streak/lessons on each focus for up-to-date stats
   - APP_VERSION const matches app.json version; could import from Constants in future
 ---
+
+## Iteration 18 - US-018: Seed Content — Units 2-4 (Intermediate Lessons)
+- What was implemented:
+  - Unit 2: "Greetings & Introductions" — 5 lessons (Formal Greetings, Informal Greetings, Thank You & Please, Where Are You From?, How Do You Feel?)
+  - Unit 3: "Numbers, Colors & Days" — 5 lessons (Numbers 6-10, Numbers 11-20, Basic Colors, More Colors, Days of the Week)
+  - Unit 4: "Food & Ordering" — 5 lessons (Common Foods, Drinks, At the Restaurant, Greek Dishes, Tastes & Preferences)
+  - All 15 lessons include varied exercise types: multiple_choice, translation, fill_blank, match_pairs, listening
+  - All content (prompts, options, vocabulary translations) provided in EN, ES, FR
+  - Each lesson has 5 vocabulary items and 5 exercises
+  - Seed version bumped from '1' to '2' so existing users get new vocabulary inserted
+- Files changed:
+  - src/content/seedData.ts (added 3 units with 15 lessons, ~1400 lines of content data)
+  - src/content/seedLoader.ts (bumped CURRENT_SEED_VERSION from '1' to '2')
+  - PRD.md (marked US-018 complete)
+- Learnings for future iterations:
+  - Seed data follows consistent pattern: unit > lesson > vocabulary[] + exercises[]
+  - IDs follow convention: u{unit}-l{lesson} for lessons, u{unit}-l{lesson}-ex{n} for exercises
+  - Bumping CURRENT_SEED_VERSION triggers re-seed on next app launch for existing users
+  - Seed loader is idempotent for vocabulary (checks existing by greek + lesson_id before insert)
+  - Each lesson should have 4-5 exercises of varied types for good learning coverage
+  - Modern Greek vocabulary: use common colloquial forms (εφτά not επτά, οχτώ not οκτώ)
+---

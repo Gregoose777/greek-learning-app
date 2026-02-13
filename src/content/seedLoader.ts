@@ -8,7 +8,7 @@ import { greekCourse } from './seedData';
 import type { Course, Lesson } from './types';
 
 const SEED_VERSION_KEY = 'hellenica_seed_version';
-const CURRENT_SEED_VERSION = '1';
+const CURRENT_SEED_VERSION = '2';
 
 /** Check if seed data has already been loaded */
 async function isSeedLoaded(): Promise<boolean> {
