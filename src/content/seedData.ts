@@ -149,15 +149,15 @@ export const greekCourse: Course = {
             fr: 'Plus de Lettres Grecques (Ζ-Κ)',
           },
           description: {
-            en: 'Learn the letters Zeta through Kappa',
-            es: 'Aprende las letras Zeta a Kappa',
-            fr: 'Apprenez les lettres Zêta à Kappa',
+            en: 'Learn the letters Zita through Kappa',
+            es: 'Aprende las letras Zita a Kappa',
+            fr: 'Apprenez les lettres Zita à Kappa',
           },
           vocabulary: [
             {
               greek: 'Ζ ζ',
               transliteration: 'zíta',
-              translation: { en: 'Zeta', es: 'Zeta', fr: 'Zêta' },
+              translation: { en: 'Zita', es: 'Zita', fr: 'Zita' },
             },
             {
               greek: 'Η η',
@@ -167,7 +167,7 @@ export const greekCourse: Course = {
             {
               greek: 'Θ θ',
               transliteration: 'thíta',
-              translation: { en: 'Theta', es: 'Zeta', fr: 'Thêta' },
+              translation: { en: 'Theta', es: 'Theta', fr: 'Thêta' },
             },
             {
               greek: 'Ι ι',
@@ -190,9 +190,9 @@ export const greekCourse: Course = {
                 fr: 'Quelle lettre fait le son "th" en grec ?',
               },
               options: [
-                { en: 'Ζ ζ (Zeta)', es: 'Ζ ζ (Zeta)', fr: 'Ζ ζ (Zêta)' },
+                { en: 'Ζ ζ (Zita)', es: 'Ζ ζ (Zita)', fr: 'Ζ ζ (Zita)' },
                 { en: 'Η η (Eta)', es: 'Η η (Eta)', fr: 'Η η (Êta)' },
-                { en: 'Θ θ (Theta)', es: 'Θ θ (Zeta)', fr: 'Θ θ (Thêta)' },
+                { en: 'Θ θ (Theta)', es: 'Θ θ (Theta)', fr: 'Θ θ (Thêta)' },
                 { en: 'Κ κ (Kappa)', es: 'Κ κ (Kappa)', fr: 'Κ κ (Kappa)' },
               ],
               correctIndex: 2,
@@ -208,8 +208,8 @@ export const greekCourse: Course = {
               options: [
                 { en: 'Eta', es: 'Eta', fr: 'Êta' },
                 { en: 'Iota', es: 'Iota', fr: 'Iota' },
-                { en: 'Zeta', es: 'Zeta', fr: 'Zêta' },
-                { en: 'Theta', es: 'Zeta', fr: 'Thêta' },
+                { en: 'Zita', es: 'Zita', fr: 'Zita' },
+                { en: 'Theta', es: 'Theta', fr: 'Thêta' },
               ],
               correctIndex: 0,
             },
@@ -217,9 +217,9 @@ export const greekCourse: Course = {
               id: 'u1-l2-ex3',
               type: 'match_pairs',
               pairs: [
-                { greek: 'Ζ', translation: { en: 'Zeta', es: 'Zeta', fr: 'Zêta' } },
+                { greek: 'Ζ', translation: { en: 'Zita', es: 'Zita', fr: 'Zita' } },
                 { greek: 'Η', translation: { en: 'Eta', es: 'Eta', fr: 'Êta' } },
-                { greek: 'Θ', translation: { en: 'Theta', es: 'Zeta', fr: 'Thêta' } },
+                { greek: 'Θ', translation: { en: 'Theta', es: 'Theta', fr: 'Thêta' } },
                 { greek: 'Ι', translation: { en: 'Iota', es: 'Iota', fr: 'Iota' } },
                 { greek: 'Κ', translation: { en: 'Kappa', es: 'Kappa', fr: 'Kappa' } },
               ],
@@ -234,9 +234,9 @@ export const greekCourse: Course = {
                 fr: 'Quelle lettre avez-vous entendue ?',
               },
               options: [
-                { en: 'Zeta (Ζ)', es: 'Zeta (Ζ)', fr: 'Zêta (Ζ)' },
+                { en: 'Zita (Ζ)', es: 'Zita (Ζ)', fr: 'Zita (Ζ)' },
                 { en: 'Eta (Η)', es: 'Eta (Η)', fr: 'Êta (Η)' },
-                { en: 'Theta (Θ)', es: 'Zeta (Θ)', fr: 'Thêta (Θ)' },
+                { en: 'Theta (Θ)', es: 'Theta (Θ)', fr: 'Thêta (Θ)' },
                 { en: 'Kappa (Κ)', es: 'Kappa (Κ)', fr: 'Kappa (Κ)' },
               ],
               correctIndex: 2,

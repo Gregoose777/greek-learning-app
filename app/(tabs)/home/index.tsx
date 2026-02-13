@@ -181,6 +181,11 @@ export default function HomeScreen() {
             ? t('home.dailyGoalComplete')
             : t('home.dailyGoalProgress', { completed: todayLessons, goal: dailyGoal })}
         </Text>
+        {goalMet && (
+          <Text style={[styles.goalText, { marginTop: spacing.xs }]}>
+            {t('home.dailyGoalProgress', { completed: todayLessons, goal: dailyGoal })}
+          </Text>
+        )}
       </Card>
 
       {/* Continue button */}

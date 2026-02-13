@@ -18,7 +18,7 @@ export default {
     reviewDue: 'Repasos Pendientes',
     dailyGoal: 'Meta Diaria',
     dailyGoalProgress: '{{completed}} de {{goal}} lecciones hoy',
-    dailyGoalComplete: '¡Meta diaria alcanzada!',
+    dailyGoalComplete: '¡Meta diaria alcanzada! ¿Seguimos?',
   },
   // Lessons screen
   lessons: {

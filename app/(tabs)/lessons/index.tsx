@@ -19,23 +19,13 @@ function getLocalizedText(text: LocalizedString, lang: string): string {
 function getLessonStatus(
   lesson: Lesson,
   progressMap: Map<string, LessonProgress>,
-  allLessons: Lesson[],
+  _allLessons: Lesson[],
 ): LessonStatus {
   const progress = progressMap.get(lesson.id);
   if (progress?.completed) return 'completed';
 
-  // First lesson of the first unit is always unlocked
-  if (lesson.order === 1 && lesson.unitId === allLessons[0]?.unitId) return 'unlocked';
-
-  // A lesson is unlocked if the previous lesson (by global order) is completed
-  const currentIndex = allLessons.findIndex((l) => l.id === lesson.id);
-  if (currentIndex <= 0) return 'unlocked';
-
-  const prevLesson = allLessons[currentIndex - 1];
-  const prevProgress = progressMap.get(prevLesson.id);
-  if (prevProgress?.completed) return 'unlocked';
-
-  return 'locked';
+  // All lessons are freely accessible
+  return 'unlocked';
 }
 
 function getUnitCompletion(unit: Unit, progressMap: Map<string, LessonProgress>): number {

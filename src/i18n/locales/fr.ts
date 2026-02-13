@@ -18,7 +18,7 @@ export default {
     reviewDue: 'Révisions à Faire',
     dailyGoal: 'Objectif Quotidien',
     dailyGoalProgress: '{{completed}} sur {{goal}} leçons aujourd\'hui',
-    dailyGoalComplete: 'Objectif quotidien atteint !',
+    dailyGoalComplete: 'Objectif quotidien atteint ! On continue ?',
   },
   // Lessons screen
   lessons: {
