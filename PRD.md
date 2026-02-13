@@ -35,12 +35,12 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a developer, I need a consistent design system so all screens share a cohesive look and feel.
 
 **Acceptance Criteria:**
-- [ ] Color palette defined (primary, secondary, success, error, backgrounds, text)
-- [ ] Shared `Button`, `Card`, `ProgressBar`, `Badge` components created
-- [ ] Typography scale (heading, body, caption) with consistent fonts
-- [ ] Light theme applied globally (dark mode is a non-goal for now)
-- [ ] Components render correctly in a test/storybook-style screen
-- [ ] Typecheck passes
+- [x] Color palette defined (primary, secondary, success, error, backgrounds, text)
+- [x] Shared `Button`, `Card`, `ProgressBar`, `Badge` components created
+- [x] Typography scale (heading, body, caption) with consistent fonts
+- [x] Light theme applied globally (dark mode is a non-goal for now)
+- [x] Components render correctly in a test/storybook-style screen
+- [x] Typecheck passes
 
 ---
 

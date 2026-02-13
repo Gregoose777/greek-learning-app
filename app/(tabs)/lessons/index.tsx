@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { colors, typography, spacing } from '../../../src/theme';
 
 export default function LessonsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lessons</Text>
-      <Text style={styles.subtitle}>Browse units and lessons</Text>
+      <Text style={[typography.heading2, { color: colors.text }]}>Lessons</Text>
+      <Text style={[typography.body, { color: colors.textSecondary, marginTop: spacing.xs }]}>
+        Browse units and lessons
+      </Text>
     </View>
   );
 }
@@ -14,15 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#5f6368',
+    backgroundColor: colors.background,
   },
 });

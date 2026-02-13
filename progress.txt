@@ -9,6 +9,10 @@
 - npx expo install handles version compatibility; npm install --legacy-peer-deps for manual installs
 - Old App.tsx and index.ts files should be removed when migrating to expo-router
 - Test compilation with `npx expo export --platform android` instead of web (web needs react-dom)
+- Theme/design system lives in src/theme/, shared components in src/components/
+- Import theme: `import { colors, typography, spacing, borderRadius } from '../src/theme'`
+- Import components: `import { Button, Card, ProgressBar, Badge } from '../src/components'`
+- Link component with asChild for navigation buttons: `<Link href="..." asChild><Button .../></Link>`
 
 ---
 
@@ -33,4 +37,39 @@
   - node_modules copy/move is unreliable; better to just `npm install` fresh
   - TypeScript check: `npx tsc --noEmit`; compilation test: `npx expo export --platform android`
   - Ionicons import: `import { Ionicons } from '@expo/vector-icons'`
+---
+
+## Iteration 2 - US-002: Theme, Design System & Shared Components
+- What was implemented:
+  - Color palette (primary blue, secondary gold, success/error/warning, backgrounds, text, borders)
+  - Typography scale (heading1-3, body, bodyBold, caption, captionBold, button)
+  - Spacing and border radius constants
+  - Button component (primary/secondary/outline/ghost variants, sm/md/lg sizes, disabled/loading states)
+  - Card component (elevated/outlined/filled variants)
+  - ProgressBar component (configurable progress 0-1, color, height)
+  - Badge component (primary/success/error/warning/neutral variants, sm/md sizes)
+  - Light theme applied globally to all layouts and screens
+  - Component showcase screen accessible from Profile tab
+- Files changed:
+  - src/theme/colors.ts (color palette)
+  - src/theme/typography.ts (text styles)
+  - src/theme/spacing.ts (spacing + border radius)
+  - src/theme/index.ts (barrel export)
+  - src/components/Button.tsx
+  - src/components/Card.tsx
+  - src/components/ProgressBar.tsx
+  - src/components/Badge.tsx
+  - src/components/index.ts (barrel export)
+  - app/_layout.tsx (StatusBar + theme colors)
+  - app/(tabs)/_layout.tsx (themed tab bar)
+  - app/(tabs)/home/_layout.tsx + index.tsx (themed)
+  - app/(tabs)/lessons/_layout.tsx + index.tsx (themed)
+  - app/(tabs)/review/_layout.tsx + index.tsx (themed)
+  - app/(tabs)/profile/_layout.tsx + index.tsx (themed + showcase link)
+  - app/(tabs)/profile/component-showcase.tsx (new showcase screen)
+- Learnings for future iterations:
+  - src/theme/ and src/components/ are the canonical locations for design system code
+  - All screens should import colors/typography/spacing from theme instead of hardcoded values
+  - Stack screenOptions pattern for consistent headers: headerStyle, headerTitleStyle, headerShadowVisible, headerTintColor
+  - Must read a file before writing to it (Claude tool requirement)
 ---

@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { colors, typography, spacing } from '../../../src/theme';
 
 export default function ReviewScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Review</Text>
-      <Text style={styles.subtitle}>Practice vocabulary with spaced repetition</Text>
+      <Text style={[typography.heading2, { color: colors.text }]}>Review</Text>
+      <Text style={[typography.body, { color: colors.textSecondary, marginTop: spacing.xs }]}>
+        Practice vocabulary with spaced repetition
+      </Text>
     </View>
   );
 }
@@ -14,15 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#5f6368',
+    backgroundColor: colors.background,
   },
 });
