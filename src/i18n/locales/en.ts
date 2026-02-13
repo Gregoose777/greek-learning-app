@@ -126,6 +126,20 @@ export default {
     freezes: 'Freezes',
     freezeHint: 'Streak freeze protects 1 missed day',
   },
+  // Vocabulary collection
+  vocabulary: {
+    searchPlaceholder: 'Search words...',
+    wordCount: '{{count}} words',
+    wordDetail: 'Word Detail',
+    translation: 'Translation',
+    category: 'Category',
+    exampleSentence: 'Example Sentence',
+    pronunciationGuide: 'Pronunciation',
+    noResults: 'No words found',
+    tryDifferentSearch: 'Try a different search term',
+    emptyTitle: 'No vocabulary yet',
+    emptySubtitle: 'Complete lessons to build your vocabulary collection',
+  },
   // Common
   common: {
     loading: 'Loading...',

@@ -213,13 +213,13 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 **Description:** As a user, I want to browse all vocabulary I've encountered so I can review words outside of lessons.
 
 **Acceptance Criteria:**
-- [ ] Review tab shows list of all learned vocabulary items
-- [ ] Each item shows: Greek word, transliteration, translation in reference language
-- [ ] Search/filter bar to find specific words
-- [ ] Tap a word to see detail: example sentence, pronunciation guide
-- [ ] Words auto-added to vocabulary when encountered in a completed lesson
-- [ ] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Review tab shows list of all learned vocabulary items
+- [x] Each item shows: Greek word, transliteration, translation in reference language
+- [x] Search/filter bar to find specific words
+- [x] Tap a word to see detail: example sentence, pronunciation guide
+- [x] Words auto-added to vocabulary when encountered in a completed lesson
+- [x] Typecheck passes
+- [x] Verify changes work on device/simulator
 
 ---
 

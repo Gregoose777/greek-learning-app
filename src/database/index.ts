@@ -49,6 +49,8 @@ export {
   getVocabularyItemsByCategory,
   getVocabularyItemsByLesson,
   getLearnedVocabularyItems,
+  markVocabularyLearnedByLesson,
+  searchVocabularyItems,
   updateVocabularyItem,
   deleteVocabularyItem,
 } from './vocabularyItem';

@@ -118,6 +118,27 @@ export function updateVocabularyItem(data: VocabularyItemUpdate): VocabularyItem
   return getVocabularyItemById(data.id);
 }
 
+/** Mark all vocabulary items for a lesson as learned. */
+export function markVocabularyLearnedByLesson(lessonId: string): void {
+  const db = getDatabase();
+  db.runSync(
+    'UPDATE vocabulary_item SET learned = 1 WHERE lesson_id = ? AND learned = 0',
+    [lessonId]
+  );
+}
+
+/** Search vocabulary items by greek text or translation. */
+export function searchVocabularyItems(query: string, lang: 'en' | 'es' | 'fr'): VocabularyItem[] {
+  const db = getDatabase();
+  const pattern = `%${query}%`;
+  const translationCol = `translation_${lang}`;
+  const rows = db.getAllSync<VocabularyItemRow>(
+    `SELECT * FROM vocabulary_item WHERE learned = 1 AND (greek LIKE ? OR transliteration LIKE ? OR ${translationCol} LIKE ?) ORDER BY greek ASC`,
+    [pattern, pattern, pattern]
+  );
+  return rows.map(rowToVocabularyItem);
+}
+
 /** Delete a vocabulary item by ID. */
 export function deleteVocabularyItem(id: number): boolean {
   const db = getDatabase();

@@ -126,6 +126,20 @@ export default {
     freezes: 'Protecciones',
     freezeHint: 'La protección de racha cubre 1 día perdido',
   },
+  // Vocabulary collection
+  vocabulary: {
+    searchPlaceholder: 'Buscar palabras...',
+    wordCount: '{{count}} palabras',
+    wordDetail: 'Detalle de Palabra',
+    translation: 'Traducción',
+    category: 'Categoría',
+    exampleSentence: 'Oración de Ejemplo',
+    pronunciationGuide: 'Pronunciación',
+    noResults: 'No se encontraron palabras',
+    tryDifferentSearch: 'Prueba con otro término de búsqueda',
+    emptyTitle: 'Sin vocabulario aún',
+    emptySubtitle: 'Completa lecciones para construir tu colección de vocabulario',
+  },
   // Common
   common: {
     loading: 'Cargando...',

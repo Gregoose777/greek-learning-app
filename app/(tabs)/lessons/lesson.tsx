@@ -13,6 +13,7 @@ import {
   getUserProfile,
   updateUserProfile,
   recordLessonForStreak,
+  markVocabularyLearnedByLesson,
 } from '../../../src/database';
 
 export default function LessonScreen() {
@@ -80,6 +81,9 @@ export default function LessonScreen() {
         });
       }
     }
+
+    // Mark vocabulary from this lesson as learned
+    markVocabularyLearnedByLesson(lessonId);
 
     // Record streak activity
     recordLessonForStreak();

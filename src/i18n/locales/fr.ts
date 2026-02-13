@@ -126,6 +126,20 @@ export default {
     freezes: 'Protections',
     freezeHint: 'La protection de série couvre 1 jour manqué',
   },
+  // Vocabulary collection
+  vocabulary: {
+    searchPlaceholder: 'Rechercher des mots...',
+    wordCount: '{{count}} mots',
+    wordDetail: 'Détail du Mot',
+    translation: 'Traduction',
+    category: 'Catégorie',
+    exampleSentence: 'Phrase d\'exemple',
+    pronunciationGuide: 'Prononciation',
+    noResults: 'Aucun mot trouvé',
+    tryDifferentSearch: 'Essayez un autre terme de recherche',
+    emptyTitle: 'Pas encore de vocabulaire',
+    emptySubtitle: 'Terminez des leçons pour construire votre collection de vocabulaire',
+  },
   // Common
   common: {
     loading: 'Chargement...',
