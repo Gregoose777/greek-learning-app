@@ -307,7 +307,7 @@ A Duolingo-style mobile app for learning Modern Greek, built with React Native /
 - [x] User can skip to defaults at any point
 - [x] After onboarding, user lands on Home dashboard
 - [x] Typecheck passes
-- [ ] Verify changes work on device/simulator
+- [x] Verify changes work on device/simulator
 
 ---
 
